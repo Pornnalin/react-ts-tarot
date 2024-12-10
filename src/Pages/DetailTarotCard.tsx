@@ -13,8 +13,9 @@ function DetailTarotCard() {
         <div className="w-[50%] h-full flex flex-col justify-center items-center gap-4 ">
           <div className="rounded-t-full border-[3px] p-2 border-[#A88C26]">
             <div className="rounded-t-full border-[2px] p-2 border-[#A88C26]">
-              <div className="w-[280px] rounded-t-full overflow-hidden">
+              <div className="rounded-t-full overflow-hidden">
                 <img
+                  className="w-[280px]"
                   src={tarotContext?.cardDetail?.src}
                   alt={tarotContext?.cardDetail?.src}
                 />
@@ -30,7 +31,9 @@ function DetailTarotCard() {
             <p className="text-[60px] font-bold">
               {tarotContext?.cardDetail?.name}
             </p>
-            <p>{tarotContext?.cardDetail?.desc}</p>
+            <p className="h-[250px] overflow-hidden overflow-y-scroll scroll-smooth no-bg-scroll">
+              {tarotContext?.cardDetail?.desc}
+            </p>
           </div>
           <div className="py-10 flex flex-col gap-1">
             <p className="text-[40px] font-bold">Meaning</p>

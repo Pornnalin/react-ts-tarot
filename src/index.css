@@ -5,5 +5,32 @@
 body {
   background-color: #1a1b19;
   color: white;
+  scrollbar-color: rgb(58, 58, 58) transparent;
   font-family: "Montserrat", sans-serif;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(0, 0, 0, 0.9);
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(63, 63, 63);
+}
+@layer utilities {
+  .no-bg-scroll::-webkit-scrollbar-track {
+    background: rgb(63, 63, 63);
+  }
+
+  .no-bg-scroll::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  .no-bg-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .no-bg-scroll::-webkit-scrollbar-thumb {
+    background: rgb(233, 49, 49);
+  }
 }

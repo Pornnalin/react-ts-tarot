@@ -10,35 +10,53 @@ function FilterButton() {
         {buttons.map((item, index) => (
           <button
             key={index}
-            className={
-              tarotContext?.activeType
-                ? "rounded-[20px] border-[#A88C26] border-[2px] py-2 px-10 text-white font-medium text-[16px]"
-                : "rounded-[20px] border-[2px] border-transparent bg-[#A88C26] py-2 px-10 text-black font-medium text-[16px]"
-            }
-            onClick={() => tarotContext?.handleType(item.name)}
+            className={`rounded-[20px] border-[2px] py-2 px-10 font-medium text-[16px] ${
+              index.toString() === tarotContext?.selectIndexType
+                ? "border-transparent bg-[#A88C26] text-black"
+                : "border-[#A88C26] text-white  "
+            }`}
+            onClick={() => {
+              tarotContext?.getIndexType(index.toString());
+              tarotContext?.handleFilterType(item.name);
+            }}
           >
             {item.name}
           </button>
         ))}
       </div>
       <div className="flex gap-5 my-4">
-        {buttonChild.map((item, index) => (
-          <button
-            key={index}
-            className={
-              tarotContext?.activeSuit
-                ? "rounded-[20px] border-[#A88C26] border-[2px] py-2 px-8 text-white font-medium text-[13px]"
-                : "rounded-[20px] border-[#A88C26] border-[2px]  bg-[#A88C26] py-2 px-8 text-black font-medium text-[13px]"
-            }
-            onClick={() => tarotContext?.handleSuit(item.name, index)}
-          >
-            {item.name}
-          </button>
-        ))}
+        {tarotContext?.selectIndexType !== "0" &&
+          tarotContext?.selectIndexType !== undefined &&
+          buttonChild.map((item, index) => (
+            <button
+              key={index}
+              className={`rounded-[20px] border-[2px] py-2 px-10 font-medium text-[13px] ${
+                index.toString() === tarotContext?.selectIndexSuit
+                  ? "border-transparent bg-[#A88C26] text-black"
+                  : "border-[#A88C26] text-white  "
+              }`}
+              onClick={() => {
+                tarotContext?.getIndexSuit(index.toString());
+                tarotContext?.handleFilterSuit(item.name);
+              }}
+            >
+              {item.name}
+            </button>
+          ))}
       </div>
       <div className="flex gap-3">
-        <p>A-Z</p>
-        <p>Z-A</p>
+        <p
+          className="hover:underline cursor-pointer"
+          onClick={tarotContext?.sortAZ}
+        >
+          A-Z
+        </p>
+        <p
+          className="hover:underline cursor-pointer"
+          onClick={tarotContext?.sortZA}
+        >
+          Z-A
+        </p>
       </div>
     </div>
   );

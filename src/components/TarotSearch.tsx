@@ -1,8 +1,12 @@
+import { useContext } from "react";
+import { TarotContext } from "../context/tarotContext";
 import FilterButton from "./FilterButton";
 import SearchBar from "./SearchBar";
 import ShowTarotCard from "./ShowTarotCard";
 
 function TarotSearch() {
+  const tarotContext = useContext(TarotContext);
+
   return (
     <div className="flex flex-col justify-center mt-[100px] mx-20">
       <div className="flex flex-col gap-10">
@@ -15,8 +19,14 @@ function TarotSearch() {
         </h4>
       </div>
       <SearchBar />
-      <FilterButton />
-      <ShowTarotCard />
+      {tarotContext?.cardList.length ? (
+        <>
+          <FilterButton />
+          <ShowTarotCard />
+        </>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }

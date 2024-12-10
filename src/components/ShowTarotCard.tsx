@@ -5,20 +5,9 @@ import { useLocation } from "react-router-dom";
 
 function ShowTarotCard() {
   const tarotContext = useContext(TarotContext);
-  // const { cardList, tarotCardGallery, cards } = tarotContext;
+
   const location = useLocation();
 
-  // function getImage(nameInput: string): string {
-  //   const foundItem = tarotContext?.tarotCardGallery.find((item) => {
-  //     return item.name.trim().toLowerCase() === nameInput.trim().toLowerCase();
-  //   });
-  //   if (foundItem) {
-  //     return foundItem.src;
-  //   } else {
-  //     console.log(`ไม่พบภาพสำหรับ ${nameInput}`);
-  //     return "";
-  //   }
-  // }
   const shortDesc = (desc: string) => {
     const result = desc.slice(0, 90).concat("...");
     return result;
