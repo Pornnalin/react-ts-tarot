@@ -41,6 +41,8 @@ interface TarotContextType {
   handleReverse: () => void;
   isLoading: boolean;
   fetchCards: () => void;
+  handleRandCard: () => void;
+  randCardDetail: CardList | undefined;
 }
 
 interface TarotProviderProps {
@@ -58,6 +60,9 @@ export function TarotProvider({ children }: TarotProviderProps) {
     []
   );
   const [cardDetail, setCardDetail] = useState<CardList | undefined>(undefined);
+  const [randCardDetail, setRandCardDetail] = useState<CardList | undefined>(
+    undefined
+  );
   const [selectNameCard, setSelectNameCard] = useState<string>("");
   const [selectIndexType, setSelectIndexType] = useState<string | undefined>(
     undefined
@@ -90,6 +95,18 @@ export function TarotProvider({ children }: TarotProviderProps) {
       setAllCard(response.data.cards);
       // setCardList(response.data.cards);
       setSearchOriginCardList(response.data.cards);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleRandCard = async () => {
+    try {
+      const res = await axios.get(
+        "https://tarotapi.dev/api/v1/cards/random?n=1"
+      );
+      const rand = res.data.cards[0];
+      setRandCardDetail(rand);
+      console.log(rand.name);
     } catch (error) {
       console.error(error);
     }
@@ -197,6 +214,7 @@ export function TarotProvider({ children }: TarotProviderProps) {
       return "";
     }
   }
+
   return (
     <TarotContext.Provider
       value={{
@@ -225,6 +243,8 @@ export function TarotProvider({ children }: TarotProviderProps) {
         handleReverse,
         isLoading,
         fetchCards,
+        handleRandCard,
+        randCardDetail,
       }}
     >
       {children}

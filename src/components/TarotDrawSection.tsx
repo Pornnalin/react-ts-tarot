@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import backcard from "../assets/Images/backcard.png";
 import thefool from "../assets/Images/The Fool.png";
+import { TarotContext } from "../context/tarotContext";
+
 function TarotDrawSection() {
+  const tarotContext = useContext(TarotContext);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const toggleAnimation = () => {
     setIsPaused(!isPaused);
+  };
+  const getRandImage = () => {
+    console.log(tarotContext?.randCardDetail?.name);
+    return tarotContext?.getImage(tarotContext?.randCardDetail?.name || "");
   };
   return (
     <div className="relative text-center my-[40px] py-[40px]">
@@ -17,28 +24,68 @@ function TarotDrawSection() {
         >
           <ul className="flex pl-0 m-0">
             <li>
-              <img src={backcard} alt="" />
+              <div className="front">
+                <img src={backcard} alt="back of card" />
+              </div>
+              <div className="back">
+                <img src={getRandImage()} alt="front of card" />
+              </div>
             </li>
             <li>
-              <img src={backcard} alt="" />
+              <div className="front">
+                <img src={backcard} alt="back of card" />
+              </div>
+              <div className="back">
+                <img src={getRandImage()} alt="front of card" />
+              </div>
             </li>
             <li>
-              <img src={backcard} alt="" />
+              <div className="front">
+                <img src={backcard} alt="back of card" />
+              </div>
+              <div className="back">
+                <img src={getRandImage()} alt="front of card" />
+              </div>
             </li>
             <li>
-              <img src={backcard} alt="" />
+              <div className="front">
+                <img src={backcard} alt="back of card" />
+              </div>
+              <div className="back">
+                <img src={getRandImage()} alt="front of card" />
+              </div>
             </li>
             <li>
-              <img src={backcard} alt="" />
+              <div className="front ">
+                <img src={backcard} alt="back of card" />
+              </div>
+              <div className="back">
+                <img src={getRandImage()} alt="front of card" />
+              </div>
             </li>
             <li>
-              <img src={backcard} alt="" />
+              <div className="front">
+                <img src={backcard} alt="back of card" />
+              </div>
+              <div className="back">
+                <img src={getRandImage()} alt="front of card" />
+              </div>
             </li>
             <li>
-              <img src={backcard} alt="" />
+              <div className="front">
+                <img src={backcard} alt="back of card" />
+              </div>
+              <div className="back">
+                <img src={getRandImage()} alt="front of card" />
+              </div>
             </li>
             <li>
-              <img src={backcard} alt="" />
+              <div className="front">
+                <img src={backcard} alt="back of card" />
+              </div>
+              <div className="back">
+                <img src={getRandImage()} alt="front of card" />
+              </div>
             </li>
           </ul>
         </div>
@@ -46,7 +93,10 @@ function TarotDrawSection() {
       <div className="py-3 flex justify-center">
         <button
           className="rounded-[26px] bg-[#A88C26] py-[10px] px-[26px] text-white font-medium text-[16px]"
-          onClick={toggleAnimation}
+          onClick={() => {
+            toggleAnimation();
+            tarotContext?.handleRandCard();
+          }}
         >
           Draw Your Fate
         </button>
