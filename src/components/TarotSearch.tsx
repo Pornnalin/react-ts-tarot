@@ -25,7 +25,7 @@ function TarotSearch() {
           <ShowTarotCard />
         </>
       ) : (
-        <div></div>
+        <div className="items-center text-center"></div>
       )}
     </div>
   );

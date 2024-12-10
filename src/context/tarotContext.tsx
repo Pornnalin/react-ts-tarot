@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 import { tarotCardImages } from "../components/TarotCardImages";
-import { BiUnderline } from "react-icons/bi";
+import { useLocation } from "react-router-dom";
 
 interface CardList {
   type: string;
@@ -37,6 +37,10 @@ interface TarotContextType {
   setSelectIndexSuit: React.Dispatch<React.SetStateAction<string>>;
   sortAZ: () => void;
   sortZA: () => void;
+  isReverse: boolean;
+  handleReverse: () => void;
+  isLoading: boolean;
+  fetchCards: () => void;
 }
 
 interface TarotProviderProps {
@@ -59,10 +63,16 @@ export function TarotProvider({ children }: TarotProviderProps) {
     undefined
   );
   const [selectIndexSuit, setSelectIndexSuit] = useState<string>("");
+  const [isReverse, setIsReverse] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchSearchResults = async (input: string) => {
+    if (input.trim() == "") {
+      return;
+    }
     const apiSearch = `https://tarotapi.dev/api/v1/cards/search?q=${input}`;
     try {
+      setIsLoading(true);
       const response = await axios.get(apiSearch);
       // console.log(apiSearch);
       console.log(response.data.cards);
@@ -70,31 +80,51 @@ export function TarotProvider({ children }: TarotProviderProps) {
       setSearchOriginCardList(response.data.cards);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   const fetchCards = async () => {
     try {
       const response = await axios.get(`https://tarotapi.dev/api/v1/cards/`);
       setAllCard(response.data.cards);
+      // setCardList(response.data.cards);
+      setSearchOriginCardList(response.data.cards);
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(() => {
-    fetchCards();
+    if (window.location.pathname === "/tarotdeck") fetchCards();
   }, []);
 
   const handleFilterType = (selectType: string) => {
-    const resType = originSearchCardList.filter(
-      (item) => item.type.toLowerCase() === selectType.toLowerCase()
-    );
-    setCardList(resType);
+    let resType = [];
+    if (window.location.pathname === "/tarotdeck") {
+      resType = originSearchCardList.filter(
+        (item) => item.type.toLowerCase() === selectType.toLowerCase()
+      );
+      setAllCard(resType);
+    } else {
+      resType = originSearchCardList.filter(
+        (item) => item.type.toLowerCase() === selectType.toLowerCase()
+      );
+      setCardList(resType);
+    }
   };
   const handleFilterSuit = (selectSuit: string) => {
-    const resType = originSearchCardList.filter(
-      (item) => item.suit !== "" && item.suit === selectSuit
-    );
-    setCardList(resType);
+    let resSuit = [];
+    if (window.location.pathname === "/tarotdeck") {
+      resSuit = originSearchCardList.filter(
+        (item) => item.suit !== "" && item.suit === selectSuit
+      );
+      setAllCard(resSuit);
+    } else {
+      resSuit = originSearchCardList.filter(
+        (item) => item.suit !== "" && item.suit === selectSuit
+      );
+      setCardList(resSuit);
+    }
   };
 
   const getIndexType = (index: string) => {
@@ -104,19 +134,38 @@ export function TarotProvider({ children }: TarotProviderProps) {
     setSelectIndexSuit(index);
   };
   const sortAZ = () => {
-    const resType = [...originSearchCardList].sort((a, b) =>
-      a.name.localeCompare(b.name)
-    );
-    setCardList(resType);
+    let sort = [];
+    if (window.location.pathname === "/tarotdeck") {
+      sort = [...originSearchCardList].sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      setAllCard(sort);
+    } else {
+      sort = [...originSearchCardList].sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      setCardList(sort);
+    }
     console.log("a-z");
   };
 
   const sortZA = () => {
-    const resType = [...originSearchCardList].sort((a, b) =>
-      b.name.localeCompare(a.name)
-    );
-    setCardList(resType);
-    console.log("z-a");
+    let sort = [];
+    if (window.location.pathname === "/tarotdeck") {
+      sort = [...originSearchCardList].sort((a, b) =>
+        b.name.localeCompare(a.name)
+      );
+      setAllCard(sort);
+    } else {
+      sort = [...originSearchCardList].sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      setCardList(sort);
+    }
+    console.log("a-z");
+  };
+  const handleReverse = () => {
+    setIsReverse((prev) => !prev);
   };
   useEffect(() => {
     const findItem = allCard.find((item) => item.name === selectNameCard);
@@ -172,6 +221,10 @@ export function TarotProvider({ children }: TarotProviderProps) {
         handleFilterSuit,
         sortAZ,
         sortZA,
+        isReverse,
+        handleReverse,
+        isLoading,
+        fetchCards,
       }}
     >
       {children}

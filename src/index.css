@@ -34,3 +34,21 @@ body {
     background: rgb(233, 49, 49);
   }
 }
+.sliderCard {
+  animation: cardmove 10s linear infinite;
+}
+@keyframes cardmove {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.sliderCard li {
+  width: 100%;
+}
+.paused {
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+}

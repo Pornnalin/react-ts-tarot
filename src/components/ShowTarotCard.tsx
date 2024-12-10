@@ -12,6 +12,7 @@ function ShowTarotCard() {
     const result = desc.slice(0, 90).concat("...");
     return result;
   };
+
   return (
     <>
       {location.pathname !== "/tarotdeck" ? (

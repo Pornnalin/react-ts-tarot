@@ -20,7 +20,7 @@ function FilterButton() {
               tarotContext?.handleFilterType(item.name);
             }}
           >
-            {item.name}
+            {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
           </button>
         ))}
       </div>
@@ -40,7 +40,7 @@ function FilterButton() {
                 tarotContext?.handleFilterSuit(item.name);
               }}
             >
-              {item.name}
+              {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
             </button>
           ))}
       </div>

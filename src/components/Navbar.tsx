@@ -1,6 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 // import { RiSparkling2Fill } from "react-icons/ri";
+import { TarotContext } from "../context/tarotContext";
+
 function Navbar() {
+  const tarotContext = useContext(TarotContext);
+
   return (
     <div className="py-10 flex flex-col md:flex-row justify-between">
       <div className="inline-flex relative pr-8">
@@ -14,7 +19,9 @@ function Navbar() {
               <Link to="/">Explore</Link>
             </li>
             <li>
-              <Link to="/tarotdeck">Tarot Deck</Link>
+              <Link to="/tarotdeck" onClick={tarotContext?.fetchCards}>
+                Tarot Deck
+              </Link>
             </li>
             <li>
               <Link to="/tarotdraw">Your Tarot Draw</Link>
