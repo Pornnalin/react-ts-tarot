@@ -42,6 +42,7 @@ interface TarotContextType {
   fetchCards: () => void;
   handleRandCard: () => void;
   randCardDetail: CardList | undefined;
+  setRandCardDetail: React.Dispatch<React.SetStateAction<CardList | undefined>>;
   searchDeckPage: string;
   setSearchDeckPage: React.Dispatch<React.SetStateAction<string>>;
   searchInDeckPage: (input: string) => Promise<void>;
@@ -304,6 +305,7 @@ export function TarotProvider({ children }: TarotProviderProps) {
         goToBackPage,
         current,
         maxPage,
+        setRandCardDetail,
       }}
     >
       {children}

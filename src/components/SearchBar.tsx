@@ -43,6 +43,12 @@ function SearchBar() {
         >
           Love
         </span>
+        <span
+          className="font-light italic text-[16px] underline cursor-pointer"
+          onClick={handleClick}
+        >
+          Money
+        </span>
       </div>
     </div>
   );

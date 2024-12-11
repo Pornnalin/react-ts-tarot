@@ -6,33 +6,6 @@ import { TarotContext } from "../context/tarotContext";
 
 export default function TarotDeck() {
   const tarotContext = useContext(TarotContext);
-  // const [current, setCurrent] = useState<number>(1);
-  // const [maxPage, setMaxPage] = useState<number>(0);
-  // const [startIndex, setStartIndex] = useState<number>(0);
-  // const [endIndex, setEndIndex] = useState<number>(8);
-
-  // function findMaxPage() {
-  //   const allCardsLength = tarotContext?.allCard?.length || 0; //  undefined;
-  //   const result = Math.ceil(allCardsLength / 8);
-  //   setMaxPage(result);
-  // }
-  // const goToNextPage = () => {
-  //   if (current < maxPage) {
-  //     setCurrent((pre) => pre + 1);
-  //     setStartIndex((prev) => prev + 8);
-  //     setEndIndex((prev) => prev + 8);
-  //   }
-  // };
-  // const goToBackPage = () => {
-  //   if (current > 1) {
-  //     setCurrent((pre) => pre - 1);
-  //     setStartIndex((prev) => prev - 8);
-  //     setEndIndex((prev) => prev - 8);
-  //   }
-  // };
-  // useEffect(() => {
-  //   findMaxPage();
-  // }, [tarotContext?.allCard.length]);
 
   return (
     <div className="max-mx-auto px-[70px] ">
