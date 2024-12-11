@@ -3,13 +3,13 @@ import TarotDrawSection from "../components/TarotDrawSection";
 
 export default function TarotDraw() {
   return (
-    <>
+    <div className="">
       <div className="max-mx-auto px-[70px]">
         <Navbar />
       </div>
-      <div>
+      <div className="animate-fadein">
         <TarotDrawSection />
       </div>
-    </>
+    </div>
   );
 }

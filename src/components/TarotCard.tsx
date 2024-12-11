@@ -21,7 +21,7 @@ function TarotCard({ name, img, desc }: tarotProps) {
   };
   return (
     <div
-      className="flex flex-col max-w-[350px] max-h-[650px] box-border rounded-t-full overflow-hidden shadow-lg bg-[#000000] cursor-pointer"
+      className="flex flex-col max-w-[350px] max-h-[650px] box-border rounded-t-full overflow-hidden shadow-lg bg-[#000000] cursor-pointer animate-fadeinup"
       onClick={handleClickDetail}
     >
       <div className="bg-black w-full h-full overflow-hidden">

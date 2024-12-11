@@ -6,16 +6,16 @@ import { useContext } from "react";
 function DetailTarotCard() {
   const tarotContext = useContext(TarotContext);
   return (
-    <div className="max-mx-auto px-[70px] h-full">
+    <div className="max-mx-auto px-[70px] h-full ">
       <NavbarDetail />
-      <div className="flex h-full ">
+      <div className="flex h-full animate-fadein ">
         <div className="w-[50%] h-full flex flex-col justify-center items-center gap-4 ">
           {!tarotContext?.isReverse ? (
-            <div className="rounded-t-full border-[3px] p-2 border-[#A88C26] ">
-              <div className="rounded-t-full border-[2px] p-2 border-[#A88C26] ">
+            <div className="rounded-t-full border-[3px] p-2 border-[#A88C26] transition-transform duration-[2s]">
+              <div className="rounded-t-full border-[2px] p-2 border-[#A88C26] transition-transform duration-[2s]">
                 <div className="rounded-t-full overflow-hidden">
                   <img
-                    className="w-[280px]"
+                    className="w-[280px] "
                     src={tarotContext?.cardDetail?.src}
                     alt={tarotContext?.cardDetail?.src}
                   />
@@ -23,11 +23,11 @@ function DetailTarotCard() {
               </div>
             </div>
           ) : (
-            <div className="rounded-t-full border-[3px] p-2 border-[#A88C26] rotate-180 ">
+            <div className="rounded-t-full border-[3px] p-2 border-[#A88C26] rotate-180 transition-transform duration-[2s] ">
               <div className="rounded-t-full border-[2px] p-2 border-[#A88C26] ">
                 <div className="rounded-b-full overflow-hidden rotate-180">
                   <img
-                    className="w-[280px]"
+                    className="w-[280px] "
                     src={tarotContext?.cardDetail?.src}
                     alt={tarotContext?.cardDetail?.src}
                   />
@@ -36,7 +36,7 @@ function DetailTarotCard() {
             </div>
           )}
           <button
-            className="rounded-[20px] bg-[#A88C26] py-1 px-6 text-black font-medium text-[16px]"
+            className="rounded-[20px] bg-[#A88C26] py-1 px-6  text-black font-medium text-[16px]"
             onClick={tarotContext?.handleReverse}
           >
             Reverse
@@ -47,6 +47,17 @@ function DetailTarotCard() {
             <p className="text-[60px] font-bold">
               {tarotContext?.cardDetail?.name}
             </p>
+            <div className="py-3 flex gap-5">
+              <button className="capitalize rounded-[20px] cursor-default bg-[#A88C26] py-1 px-6 text-black font-medium text-[14px]">
+                {tarotContext?.cardDetail?.type}
+              </button>
+              {tarotContext?.cardDetail?.suit &&
+                tarotContext?.cardDetail?.suit?.length > 0 && (
+                  <button className="capitalize rounded-[20px] cursor-default bg-[#A88C26] py-1 px-6 text-black font-medium text-[14px]">
+                    {tarotContext?.cardDetail?.suit}
+                  </button>
+                )}
+            </div>
             <p
               className={`overflow-hidden overflow-y-scroll scroll-smooth no-bg-scroll
                 ${
@@ -67,26 +78,20 @@ function DetailTarotCard() {
                 ? tarotContext?.cardDetail?.meaning_rev
                 : tarotContext?.cardDetail?.meaning_up}
             </p>
-            <div className="py-3 flex gap-5">
-              <button className="rounded-[20px] bg-[#A88C26] py-1 px-6 text-black font-medium text-[14px]">
+            {/* <div className="py-3 flex gap-5">
+              <button className="capitalize rounded-[20px] cursor-default bg-[#A88C26] py-1 px-6 text-black font-medium text-[14px]">
                 {tarotContext?.cardDetail?.type}
               </button>
               {tarotContext?.cardDetail?.suit &&
                 tarotContext?.cardDetail?.suit?.length > 0 && (
-                  <button className="rounded-[20px] bg-[#A88C26] py-1 px-6 text-black font-medium text-[14px]">
+                  <button className="capitalize rounded-[20px] cursor-default bg-[#A88C26] py-1 px-6 text-black font-medium text-[14px]">
                     {tarotContext?.cardDetail?.suit}
                   </button>
                 )}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
-      {/* <div className="inline-flex items-center justify-center w-full mb-10">
-        <hr className="w-full h-[0.1px] bg-gray-500 border-0 rounded dark:bg-gray-400" />
-        <div className="absolute px-4 -translate-x-1/2 bg-white left-1/2 dark:bg-gray-900">
-          <GoMoon className="text-2xl" />
-        </div>
-      </div> */}
     </div>
   );
 }

@@ -9,12 +9,13 @@ function ShowTarotCard() {
   const location = useLocation();
 
   const shortDesc = (desc: string) => {
-    const result = desc.slice(0, 90).concat("...");
+    const result = desc.slice(0, 40).concat("...");
     return result;
   };
 
   return (
     <>
+      {/* //573กำลังดี */}
       {location.pathname !== "/tarotdeck" ? (
         <div className="grid py-20 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-[120px] gap-y-20">
           {tarotContext?.cardList.map((item, index) => (

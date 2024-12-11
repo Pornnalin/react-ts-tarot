@@ -5,7 +5,7 @@ function FilterButton() {
   const tarotContext = useContext(TarotContext);
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 ">
       <div className="flex gap-5">
         {buttons.map((item, index) => (
           <button
@@ -30,7 +30,7 @@ function FilterButton() {
           </button>
         ))}
       </div>
-      <div className="flex gap-5 my-4">
+      <div className="flex gap-5 my-4 ">
         {tarotContext?.selectIndexType !== "0" &&
           tarotContext?.selectIndexType !== undefined &&
           buttonChild.map((item, index) => (
@@ -39,7 +39,7 @@ function FilterButton() {
               className={`rounded-[20px] border-[2px] py-2 px-10 font-medium text-[13px] ${
                 index.toString() === tarotContext?.selectIndexSuit
                   ? "border-transparent bg-[#A88C26] text-black"
-                  : "border-[#A88C26] text-white"
+                  : "border-[#A88C26] text-white "
               }`}
               onClick={() => {
                 if (tarotContext?.selectIndexSuit === index.toString()) {

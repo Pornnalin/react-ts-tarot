@@ -10,8 +10,8 @@ export default function TarotDeck() {
   return (
     <div className="max-mx-auto px-[70px] ">
       <Navbar />
-      <div className="mx-20">
-        <form action="" className="pt-10 pb-5">
+      <div className="mx-20 ">
+        <form action="" className="pt-10 pb-5 animate-fadeindown">
           <div className="flex gap-6 justify-start">
             <input
               type="text"
@@ -25,10 +25,12 @@ export default function TarotDeck() {
             />
           </div>
         </form>
-        <FilterButton />
+        <div className="animate-fadeindown">
+          <FilterButton />
+        </div>
         <div>
           {tarotContext?.allCard && tarotContext?.allCard.length > 8 ? (
-            <div className="py-3 text-md flex justify-end gap-4">
+            <div className="py-3 text-md flex justify-end gap-4 animate-fadeindown">
               <button
                 className={`${
                   tarotContext.current === 1
@@ -57,7 +59,7 @@ export default function TarotDeck() {
             <p></p>
           )}
         </div>
-        <ShowTarotCard />
+        <ShowTarotCard key={tarotContext?.current} />
       </div>
     </div>
   );

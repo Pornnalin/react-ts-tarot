@@ -5,11 +5,15 @@ import Navbar from "../components/Navbar";
 export default function Explore() {
   return (
     <div>
-      <div className="max-mx-auto px-[70px]">
+      <div className="max-mx-auto px-[70px] ">
         <Navbar />
-        <TarotSearch />
+        <div className="animate-fadeindown">
+          <TarotSearch />
+        </div>
       </div>
-      <TarotDrawSection />
+      <div className="animate-fadein">
+        <TarotDrawSection />
+      </div>
     </div>
   );
 }
