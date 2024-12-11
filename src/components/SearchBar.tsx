@@ -25,7 +25,7 @@ function SearchBar() {
             }}
             type="text"
             placeholder="What’s on your mind?"
-            className=" w-[60%] pl-4 rounded-full bg-[#181717] text-left racking-wider text-[16px]"
+            className=" w-[60%] py-2 pl-4 rounded-full border-2 border-transparent bg-[#181717] text-left racking-wider text-[20px]  focus:outline-none focus:border-2 focus:border-[#A88C26]"
           />
           <button
             type="submit"

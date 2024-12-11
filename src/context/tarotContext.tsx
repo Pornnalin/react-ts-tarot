@@ -1,7 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 import { tarotCardImages } from "../components/TarotCardImages";
-import { useLocation } from "react-router-dom";
 
 interface CardList {
   type: string;
@@ -46,6 +45,12 @@ interface TarotContextType {
   searchDeckPage: string;
   setSearchDeckPage: React.Dispatch<React.SetStateAction<string>>;
   searchInDeckPage: (input: string) => Promise<void>;
+  startIndex: number;
+  endIndex: number;
+  current: number;
+  maxPage: number;
+  goToNextPage: () => void;
+  goToBackPage: () => void;
 }
 
 interface TarotProviderProps {
@@ -74,6 +79,35 @@ export function TarotProvider({ children }: TarotProviderProps) {
   const [selectIndexSuit, setSelectIndexSuit] = useState<string>("");
   const [isReverse, setIsReverse] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  //pagDeck
+  const [current, setCurrent] = useState<number>(1);
+  const [maxPage, setMaxPage] = useState<number>(0);
+  const [startIndex, setStartIndex] = useState<number>(0);
+  const [endIndex, setEndIndex] = useState<number>(8);
+
+  function findMaxPage() {
+    const allCardsLength = allCard?.length || 0; //  undefined;
+    const result = Math.ceil(allCardsLength / 8);
+    setMaxPage(result);
+  }
+  const goToNextPage = () => {
+    if (current < maxPage) {
+      setCurrent((pre) => pre + 1);
+      setStartIndex((prev) => prev + 8);
+      setEndIndex((prev) => prev + 8);
+    }
+  };
+  const goToBackPage = () => {
+    if (current > 1) {
+      setCurrent((pre) => pre - 1);
+      setStartIndex((prev) => prev - 8);
+      setEndIndex((prev) => prev - 8);
+    }
+  };
+  useEffect(() => {
+    findMaxPage();
+  }, [allCard.length]);
 
   const fetchSearchResults = async (input: string) => {
     if (input.trim() == "") {
@@ -264,6 +298,12 @@ export function TarotProvider({ children }: TarotProviderProps) {
         searchDeckPage,
         searchInDeckPage,
         setSearchDeckPage,
+        startIndex,
+        endIndex,
+        goToNextPage,
+        goToBackPage,
+        current,
+        maxPage,
       }}
     >
       {children}

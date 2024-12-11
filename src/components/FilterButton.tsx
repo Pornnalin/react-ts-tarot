@@ -16,8 +16,14 @@ function FilterButton() {
                 : "border-[#A88C26] text-white  "
             }`}
             onClick={() => {
-              tarotContext?.getIndexType(index.toString());
-              tarotContext?.handleFilterType(item.name);
+              if (tarotContext?.selectIndexType === index.toString()) {
+                tarotContext?.setSelectIndexType(undefined);
+                tarotContext?.handleFilterType(item.name);
+                tarotContext?.fetchCards();
+              } else {
+                tarotContext?.getIndexType(index.toString());
+                tarotContext?.handleFilterType(item.name);
+              }
             }}
           >
             {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
@@ -33,11 +39,16 @@ function FilterButton() {
               className={`rounded-[20px] border-[2px] py-2 px-10 font-medium text-[13px] ${
                 index.toString() === tarotContext?.selectIndexSuit
                   ? "border-transparent bg-[#A88C26] text-black"
-                  : "border-[#A88C26] text-white  "
+                  : "border-[#A88C26] text-white"
               }`}
               onClick={() => {
-                tarotContext?.getIndexSuit(index.toString());
-                tarotContext?.handleFilterSuit(item.name);
+                if (tarotContext?.selectIndexSuit === index.toString()) {
+                  tarotContext?.setSelectIndexSuit("");
+                  tarotContext?.handleFilterType("minor");
+                } else {
+                  tarotContext?.getIndexSuit(index.toString());
+                  tarotContext?.handleFilterSuit(item.name);
+                }
               }}
             >
               {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
