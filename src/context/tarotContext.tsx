@@ -43,6 +43,9 @@ interface TarotContextType {
   fetchCards: () => void;
   handleRandCard: () => void;
   randCardDetail: CardList | undefined;
+  searchDeckPage: string;
+  setSearchDeckPage: React.Dispatch<React.SetStateAction<string>>;
+  searchInDeckPage: (input: string) => Promise<void>;
 }
 
 interface TarotProviderProps {
@@ -54,6 +57,7 @@ export const TarotContext = createContext<TarotContextType | undefined>(
 );
 export function TarotProvider({ children }: TarotProviderProps) {
   const [search, setSearch] = useState<string>("");
+  const [searchDeckPage, setSearchDeckPage] = useState<string>("");
   const [cardList, setCardList] = useState<CardList[]>([]);
   const [allCard, setAllCard] = useState<CardList[]>([]); //การ์ดตั้งต้นทั้งหมดใช้ในหน้า tarotdeck
   const [originSearchCardList, setSearchOriginCardList] = useState<CardList[]>(
@@ -83,6 +87,18 @@ export function TarotProvider({ children }: TarotProviderProps) {
       console.log(response.data.cards);
       setCardList(response.data.cards);
       setSearchOriginCardList(response.data.cards);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const searchInDeckPage = async (input: string) => {
+    const apiSearch = `https://tarotapi.dev/api/v1/cards/search?q=${input}`;
+    try {
+      setIsLoading(true);
+      const response = await axios.get(apiSearch);
+      setAllCard(response.data.cards);
     } catch (error) {
       console.error(error);
     } finally {
@@ -245,6 +261,9 @@ export function TarotProvider({ children }: TarotProviderProps) {
         fetchCards,
         handleRandCard,
         randCardDetail,
+        searchDeckPage,
+        searchInDeckPage,
+        setSearchDeckPage,
       }}
     >
       {children}

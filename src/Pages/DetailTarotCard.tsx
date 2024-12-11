@@ -53,17 +53,16 @@ function DetailTarotCard() {
                   tarotContext?.cardDetail?.desc &&
                   tarotContext?.cardDetail?.desc.length > 350
                     ? "h-[250px] "
-                    : "h-[50px]"
+                    : "h-[100px]"
                 }`}
             >
               {tarotContext?.cardDetail?.desc}
             </p>
           </div>
           <div className="py-10 flex flex-col gap-1">
-            <p className="text-[40px] font-bold">Meaning</p>
+            <p className="text-[40px]  font-bold">Meaning</p>
 
-            <p>
-              {" "}
+            <p className="h-[100px]">
               {tarotContext?.isReverse
                 ? tarotContext?.cardDetail?.meaning_rev
                 : tarotContext?.cardDetail?.meaning_up}
