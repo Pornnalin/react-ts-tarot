@@ -20,6 +20,7 @@ interface TarotContextType {
   handleFilterSuit: (selectSuit: string) => void;
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
+  originSearchCardList: CardList[];
   cardList: CardList[];
   allCard: CardList[];
   tarotCardGallery: typeof tarotCardImages;
@@ -133,7 +134,9 @@ export function TarotProvider({ children }: TarotProviderProps) {
     try {
       setIsLoading(true);
       const response = await axios.get(apiSearch);
-      setAllCard(response.data.cards);
+      setTimeout(() => {
+        setAllCard(response.data.cards);
+      }, 1000);
     } catch (error) {
       console.error(error);
     } finally {
@@ -168,29 +171,23 @@ export function TarotProvider({ children }: TarotProviderProps) {
 
   const handleFilterType = (selectType: string) => {
     let resType = [];
+    resType = originSearchCardList.filter(
+      (item) => item.type.toLowerCase() === selectType.toLowerCase()
+    );
     if (window.location.pathname === "/tarotdeck") {
-      resType = originSearchCardList.filter(
-        (item) => item.type.toLowerCase() === selectType.toLowerCase()
-      );
       setAllCard(resType);
     } else {
-      resType = originSearchCardList.filter(
-        (item) => item.type.toLowerCase() === selectType.toLowerCase()
-      );
       setCardList(resType);
     }
   };
   const handleFilterSuit = (selectSuit: string) => {
     let resSuit = [];
+    resSuit = originSearchCardList.filter(
+      (item) => item.suit !== "" && item.suit === selectSuit
+    );
     if (window.location.pathname === "/tarotdeck") {
-      resSuit = originSearchCardList.filter(
-        (item) => item.suit !== "" && item.suit === selectSuit
-      );
       setAllCard(resSuit);
     } else {
-      resSuit = originSearchCardList.filter(
-        (item) => item.suit !== "" && item.suit === selectSuit
-      );
       setCardList(resSuit);
     }
   };
@@ -236,22 +233,38 @@ export function TarotProvider({ children }: TarotProviderProps) {
     setIsReverse((prev) => !prev);
   };
   useEffect(() => {
-    const findItem = allCard.find((item) => item.name === selectNameCard);
+    const fetchData = async () => {
+      const apiSearch = `https://tarotapi.dev/api/v1/cards/search?q=${selectNameCard}`;
+      try {
+        const response = await axios.get(apiSearch); // ดึงข้อมูลจาก API
+        console.log(response.data.cards);
 
-    if (findItem) {
-      setCardDetail({
-        type: findItem.type,
-        suit: findItem.suit ? findItem.suit : "",
-        name_short: findItem.name_short,
-        name: findItem.name,
-        value: findItem.value,
-        value_int: findItem.value_int,
-        meaning_up: findItem.meaning_up,
-        meaning_rev: findItem.meaning_rev,
-        desc: findItem.desc,
-        src: getImage(findItem.name),
-      });
-    }
+        const findItem = response.data.cards.find(
+          (item: CardList) => item.name === selectNameCard
+        );
+
+        if (findItem) {
+          setCardDetail({
+            type: findItem.type,
+            suit: findItem.suit ? findItem.suit : "",
+            name_short: findItem.name_short,
+            name: findItem.name,
+            value: findItem.value,
+            value_int: findItem.value_int,
+            meaning_up: findItem.meaning_up,
+            meaning_rev: findItem.meaning_rev,
+            desc: findItem.desc,
+            src: getImage(findItem.name),
+          });
+        } else {
+          console.log("Item not found");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, [selectNameCard]);
 
   function getImage(nameImage: string): string {
@@ -306,6 +319,7 @@ export function TarotProvider({ children }: TarotProviderProps) {
         current,
         maxPage,
         setRandCardDetail,
+        originSearchCardList,
       }}
     >
       {children}

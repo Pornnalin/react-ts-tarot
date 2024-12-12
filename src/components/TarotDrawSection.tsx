@@ -25,8 +25,10 @@ function TarotDrawSection() {
       tarotContext?.handleRandCard();
       setTimeout(() => {
         setIsPaused(!isPaused);
-        setIsFlipped(!isFlipped);
       }, 400);
+      setTimeout(() => {
+        setIsFlipped(!isFlipped);
+      }, 1500);
     } else {
       setIsFlipped(!isFlipped);
       setTimeout(() => {
@@ -36,18 +38,41 @@ function TarotDrawSection() {
   };
 
   return (
-    <div className="relative text-center my-[40px] py-[40px] overflow-x-hidden h-full">
-      <h3 className="text-[40px] py-2">
-        Let the Cards Guide You, Choose One to Reveal Your Path
-      </h3>
-      <div className="w-[200%]">
-        <div
-          className={`py-7 w-[100%] sliderCard ${isPaused ? "paused" : ""} `}
-        >
-          <ul className="flex pl-0 m-0 ">
-            {Array.from(Array(8), (e, i) => {
-              return (
-                <li key={i}>
+    <>
+      <div className="relative text-center my-[40px] py-[40px] overflow-x-hidden h-full">
+        <h3 className="text-[40px] py-2">
+          Let the Cards Guide You, Choose One to Reveal Your Path
+        </h3>
+        {!isPaused ? (
+          <div className="w-[200%]">
+            <div
+              className={`py-7 w-[100%] sliderCard ${
+                isPaused ? "animate-fadeout" : ""
+              } `}
+            >
+              <ul className="flex pl-0 m-0 ">
+                {Array.from(Array(8), (e, i) => {
+                  return (
+                    <li key={i}>
+                      <TarotDrawCard
+                        isPaused={false}
+                        isFlipped={false}
+                        backcard={backcard}
+                        handleClickDetail={() => console.log("")}
+                      />
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <div className="flex justify-center items-end overflow-hidden">
+            <div
+              className={`py-7 ${isPaused ? "animate-fadeindowncard" : ""} `}
+            >
+              <ul className="flex pl-0 m-0 ">
+                <li>
                   <TarotDrawCard
                     isPaused={isPaused}
                     isFlipped={isFlipped}
@@ -55,22 +80,23 @@ function TarotDrawSection() {
                     handleClickDetail={handleClickDetail}
                   />
                 </li>
-              );
-            })}
-          </ul>
+              </ul>
+            </div>
+          </div>
+        )}
+
+        <div className="py-3 flex justify-center">
+          <button
+            className="rounded-[26px] bg-[#A88C26] py-[10px] px-[26px] text-white font-medium text-[16px]"
+            onClick={() => {
+              toggleAnimation();
+            }}
+          >
+            Draw Your Fate
+          </button>
         </div>
       </div>
-      <div className="py-3 flex justify-center">
-        <button
-          className="rounded-[26px] bg-[#A88C26] py-[10px] px-[26px] text-white font-medium text-[16px]"
-          onClick={() => {
-            toggleAnimation();
-          }}
-        >
-          Draw Your Fate
-        </button>
-      </div>
-    </div>
+    </>
   );
 }
 

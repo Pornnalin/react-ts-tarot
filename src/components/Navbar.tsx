@@ -19,7 +19,7 @@ function Navbar() {
       </div>
 
       {/* Desktop Navigation */}
-      <div className="้flex">
+      <div className="hidden sm:flex">
         <nav className="font-semibold text-md">
           <ul className="flex space-x-14">
             <li>

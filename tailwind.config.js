@@ -15,12 +15,31 @@ export default {
             transform: "translate3d(0, 0, 0)",
           },
         },
+        "fade-in-down-card": {
+          "0%": {
+            opacity: 0,
+            transform: "translate3d(0, -50%, 0)",
+          },
+
+          "100%": {
+            opacity: 1,
+            transform: "translate3d(0, 0, 0)",
+          },
+        },
         "fade-in": {
           "0%": {
             opacity: 0,
           },
           "100%": {
             opacity: 1,
+          },
+        },
+        "fade-out": {
+          "100%": {
+            opacity: 1,
+          },
+          "0%": {
+            opacity: 0,
           },
         },
         "fade-in-up": {
@@ -66,7 +85,9 @@ export default {
       },
       animation: {
         fadeindown: "fade-in-down 1s ease-out",
+        fadeindowncard: "fade-in-down-card .7s ease-out",
         fadein: "fade-in 1s ease-in-out 1",
+        fadeout: "fade-out 1s ease-in-out 1",
         fadeinup: "fade-in-up .7s ease-out 1",
         fadeinright: "fade-in-right 1s ease-in-out 0.25s 1",
         dropin: "drop-in 0.6s ease-in 1",

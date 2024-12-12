@@ -1,9 +1,10 @@
 import { useContext } from "react";
 import { TarotContext } from "../context/tarotContext";
 import { buttons, buttonChild } from "./button";
+import { useLocation } from "react-router-dom";
 function FilterButton() {
   const tarotContext = useContext(TarotContext);
-
+  const location = useLocation();
   return (
     <div className="flex flex-col gap-2 ">
       <div className="flex gap-5">
@@ -19,7 +20,9 @@ function FilterButton() {
               if (tarotContext?.selectIndexType === index.toString()) {
                 tarotContext?.setSelectIndexType(undefined);
                 tarotContext?.handleFilterType(item.name);
-                tarotContext?.fetchCards();
+                if (location.pathname === "/tarotdeck") {
+                  tarotContext?.fetchCards();
+                }
               } else {
                 tarotContext?.getIndexType(index.toString());
                 tarotContext?.handleFilterType(item.name);
