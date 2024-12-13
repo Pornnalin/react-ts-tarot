@@ -38,18 +38,19 @@ function Navbar() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="flex sm:hidden">
+      <div className="flex sm:hidden overflow-hidden">
         <div className="flex items-center">
           <GiHamburgerMenu
             className="align-middle text-center cursor-pointer"
             onClick={toggleMenu}
           />
         </div>
+
         <nav
-          className={`transition-all duration-[.7s] absolute top-20 right-0 left-0 bg-black p-5 z-10 block ${
+          className={`transition-all duration-[.7s] absolute top-20 right-0 left-0  bg-black p-5 z-10 opacity-0 ${
             isMenuOpen
-              ? "opacity-100 translate-x-0"
-              : "opacity-0 translate-x-full"
+              ? "opacity-100 " // translate-x-0
+              : "opacity-0 " //translate-x-full
           } `}
         >
           <ul className="flex flex-col space-y-4">
