@@ -39,19 +39,19 @@ function TarotDrawSection() {
 
   return (
     <>
-      <div className="relative text-center my-[40px] py-[40px] overflow-x-hidden h-full">
-        <h3 className="text-[40px] py-2">
+      <div className="relative text-center my-[40px]  sm:py-[40px] overflow-x-hidden h-full">
+        <h3 className="text-xl sm:text-[40px] py-2 mx-4 sm:mx-0 md:mx-10 md:leading-relaxed ">
           Let the Cards Guide You, Choose One to Reveal Your Path
         </h3>
         {!isPaused ? (
           <div className="w-[200%]">
             <div
-              className={`py-7 w-[100%] sliderCard ${
+              className={` py-7 w-[100%] sliderCard ${
                 isPaused ? "animate-fadeout" : ""
               } `}
             >
               <ul className="flex pl-0 m-0 ">
-                {Array.from(Array(8), (e, i) => {
+                {Array.from(Array(8), (i) => {
                   return (
                     <li key={i}>
                       <TarotDrawCard

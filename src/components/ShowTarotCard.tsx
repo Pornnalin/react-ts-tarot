@@ -28,7 +28,7 @@ function ShowTarotCard() {
           ))}
         </div>
       ) : (
-        <div className="grid py-20 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-[55px]">
+        <div className="grid py-20 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-items-center gap-[55px]">
           {tarotContext?.allCard && tarotContext?.allCard.length > 0 ? (
             <>
               {tarotContext?.allCard

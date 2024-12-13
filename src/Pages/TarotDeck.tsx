@@ -8,16 +8,16 @@ export default function TarotDeck() {
   const tarotContext = useContext(TarotContext);
 
   return (
-    <div className="max-mx-auto px-[70px] ">
+    <div className="max-mx-auto sm:px-[70px] px-[30px] md:px-[50px]  ">
       <Navbar />
-      <div className="mx-20 ">
+      <div className="sm:mx-20 md:mx-0">
         <form action="" className="pt-10 pb-5 animate-fadeindown">
           <div className="flex gap-6 justify-start">
             <input
               type="text"
               value={tarotContext?.searchDeckPage}
               placeholder="Search by card or meaning..."
-              className=" w-[60%] py-2 pl-4 rounded-full border-2 border-transparent bg-[#181717] text-left racking-wider text-[20px]  focus:outline-none focus:border-2 focus:border-[#A88C26]"
+              className="md:w-[60%] w-[100%] py-2 pl-4 rounded-full border-2 border-transparent bg-[#181717] text-left racking-wider text-[20px]  focus:outline-none focus:border-2 focus:border-[#A88C26]"
               onChange={(e) => {
                 tarotContext?.setSearchDeckPage(e.target.value);
                 tarotContext?.searchInDeckPage(e.target.value);

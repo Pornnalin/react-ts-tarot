@@ -6,10 +6,10 @@ import { useContext } from "react";
 function DetailTarotCard() {
   const tarotContext = useContext(TarotContext);
   return (
-    <div className="max-mx-auto px-[70px] h-full ">
+    <div className="max-mx-auto sm:px-[70px] px-[30px] h-full ">
       <NavbarDetail />
-      <div className="flex h-full animate-fadein ">
-        <div className="w-[50%] h-full flex flex-col justify-center items-center gap-4 ">
+      <div className="flex flex-col justify-center items-center sm:px-0 px-[20px] sm:flex sm:flex-row sm:h-full animate-fadein">
+        <div className="sm:w-[50%] md:w-[100%] h-full flex flex-col justify-center items-center gap-4 ">
           {!tarotContext?.isReverse ? (
             <div className="rounded-t-full border-[3px] p-2 border-[#A88C26] transition-transform duration-[2s]">
               <div className="rounded-t-full border-[2px] p-2 border-[#A88C26] transition-transform duration-[2s]">
@@ -42,9 +42,9 @@ function DetailTarotCard() {
             Reverse
           </button>
         </div>
-        <div className="flex flex-col  justify-center mr-[90px] w-[70%]">
+        <div className="flex flex-col justify-center sm:mr-[90px] sm:w-[70%] md:mr-0 md:w-[100%] ">
           <div className="pt-10 pb-3 flex flex-col gap-1">
-            <p className="text-[60px] font-bold">
+            <p className="text-3xl sm:text-[60px] font-bold">
               {tarotContext?.cardDetail?.name}
             </p>
             <div className="py-3 flex gap-5">
@@ -71,7 +71,7 @@ function DetailTarotCard() {
             </p>
           </div>
           <div className="py-10 flex flex-col gap-1">
-            <p className="text-[40px]  font-bold">Meaning</p>
+            <p className="sm:text-[40px] text-2xl font-bold">Meaning</p>
 
             <p className="h-[100px]">
               {tarotContext?.isReverse

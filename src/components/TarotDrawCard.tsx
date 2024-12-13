@@ -26,13 +26,14 @@ function TarotDrawCard({
         isPaused ? "hover:scale-110 transition-all" : ""
       }`}
     >
-      <div className={`flip-card-inner ${isFlipped ? "flipped" : ""}`}>
-        <div className="flip-card-front">
-          <img src={backcard} alt="front of card" />
+      <div className={` flip-card-inner ${isFlipped ? "flipped" : ""}`}>
+        <div className="flip-card-front ">
+          <img src={backcard} alt="front of card" className="" />
         </div>
         <div className="flip-card-back">
           <img
             src={getRandImage()}
+            className=""
             alt="back of card"
             onClick={handleClickDetail}
           />

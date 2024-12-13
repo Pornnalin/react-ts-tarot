@@ -21,7 +21,8 @@ interface TarotContextType {
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   originSearchCardList: CardList[];
-  cardList: CardList[];
+  cardList: CardList[] | [];
+  setCardList: React.Dispatch<React.SetStateAction<CardList[] | []>>;
   allCard: CardList[];
   tarotCardGallery: typeof tarotCardImages;
   cardDetail: CardList | undefined;
@@ -65,7 +66,7 @@ export const TarotContext = createContext<TarotContextType | undefined>(
 export function TarotProvider({ children }: TarotProviderProps) {
   const [search, setSearch] = useState<string>("");
   const [searchDeckPage, setSearchDeckPage] = useState<string>("");
-  const [cardList, setCardList] = useState<CardList[]>([]);
+  const [cardList, setCardList] = useState<CardList[] | []>([]);
   const [allCard, setAllCard] = useState<CardList[]>([]); //การ์ดตั้งต้นทั้งหมดใช้ในหน้า tarotdeck
   const [originSearchCardList, setSearchOriginCardList] = useState<CardList[]>(
     []
@@ -320,6 +321,7 @@ export function TarotProvider({ children }: TarotProviderProps) {
         maxPage,
         setRandCardDetail,
         originSearchCardList,
+        setCardList,
       }}
     >
       {children}
