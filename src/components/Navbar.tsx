@@ -15,7 +15,7 @@ function Navbar() {
   return (
     <div className="py-10 flex flex-row justify-between">
       <div className="inline-flex relative pr-8">
-        <h3 className="font-bold text-2xl">TAROT</h3>
+        <h3 className="font-bold text-2xl uppercase">tarotwhisper</h3>
       </div>
 
       {/* Desktop Navigation */}
