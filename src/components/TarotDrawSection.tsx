@@ -40,7 +40,7 @@ function TarotDrawSection() {
   return (
     <>
       <div className="relative text-center my-[40px]  sm:py-[40px] overflow-x-hidden h-full">
-        <h3 className="text-xl sm:text-[40px] py-2 mx-4 sm:mx-0 md:mx-10 md:leading-relaxed ">
+        <h3 className="text-xl sm:text-[40px] py-2 mx-4 sm:mx-0 md:mx-10 leading-relaxed ">
           Let the Cards Guide You, Choose One to Reveal Your Path
         </h3>
         {!isPaused ? (
@@ -51,7 +51,7 @@ function TarotDrawSection() {
               } `}
             >
               <ul className="flex pl-0 m-0 ">
-                {Array.from(Array(8), (i) => {
+                {Array.from(Array(8), (_, i) => {
                   return (
                     <li key={i}>
                       <TarotDrawCard
@@ -72,7 +72,7 @@ function TarotDrawSection() {
               className={`py-7 ${isPaused ? "animate-fadeindowncard" : ""} `}
             >
               <ul className="flex pl-0 m-0 ">
-                <li>
+                <li className="cursor-pointer">
                   <TarotDrawCard
                     isPaused={isPaused}
                     isFlipped={isFlipped}

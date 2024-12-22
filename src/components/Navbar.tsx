@@ -22,15 +22,15 @@ function Navbar() {
       <div className="hidden sm:flex">
         <nav className="font-semibold text-md">
           <ul className="flex space-x-14">
-            <li>
+            <li className="hover:underline">
               <Link to="/">Explore</Link>
             </li>
-            <li>
+            <li className="hover:underline">
               <Link to="/tarotdeck" onClick={tarotContext?.fetchCards}>
                 Tarot Deck
               </Link>
             </li>
-            <li>
+            <li className="hover:underline">
               <Link to="/tarotdraw">Your Tarot Draw</Link>
             </li>
           </ul>

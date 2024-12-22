@@ -159,10 +159,12 @@ export function TarotProvider({ children }: TarotProviderProps) {
       const res = await axios.get(
         "https://tarotapi.dev/api/v1/cards/random?n=1"
       );
+      setIsLoading(true);
       const rand = res.data.cards[0];
       setRandCardDetail(rand);
       console.log(rand.name);
     } catch (error) {
+      setIsLoading(false);
       console.error(error);
     }
   };
@@ -238,7 +240,7 @@ export function TarotProvider({ children }: TarotProviderProps) {
       const apiSearch = `https://tarotapi.dev/api/v1/cards/search?q=${selectNameCard}`;
       try {
         const response = await axios.get(apiSearch); // ดึงข้อมูลจาก API
-        console.log(response.data.cards);
+        // console.log(response.data.cards);
 
         const findItem = response.data.cards.find(
           (item: CardList) => item.name === selectNameCard
@@ -258,7 +260,7 @@ export function TarotProvider({ children }: TarotProviderProps) {
             src: getImage(findItem.name),
           });
         } else {
-          console.log("Item not found");
+          // console.log("Item not found");
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -275,7 +277,7 @@ export function TarotProvider({ children }: TarotProviderProps) {
     if (foundItem) {
       return foundItem.src;
     } else {
-      console.log(`Not found ${nameImage}`);
+      // console.log(`Not found ${nameImage}`);
       return "";
     }
   }

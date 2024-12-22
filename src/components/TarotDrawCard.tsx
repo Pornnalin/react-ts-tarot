@@ -16,7 +16,7 @@ function TarotDrawCard({
   const tarotContext = useContext(TarotContext);
 
   const getRandImage = () => {
-    console.log(tarotContext?.randCardDetail?.name);
+    // console.log(tarotContext?.randCardDetail?.name);
     return tarotContext?.getImage(tarotContext?.randCardDetail?.name || "");
   };
 
