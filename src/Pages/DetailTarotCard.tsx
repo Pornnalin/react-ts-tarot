@@ -15,6 +15,12 @@ function DetailTarotCard() {
     // Clear timeout when component unmounts
     return () => clearTimeout(timer);
   }, []);
+  useEffect(() => {
+    const storedCardDetail = localStorage.getItem("cardDetail");
+    if (storedCardDetail) {
+      tarotContext?.setCardDetail(JSON.parse(storedCardDetail));
+    }
+  }, []);
   return (
     <div className="max-mx-auto sm:px-[70px] px-[30px] h-full ">
       <NavbarDetail />

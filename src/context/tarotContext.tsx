@@ -269,6 +269,11 @@ export function TarotProvider({ children }: TarotProviderProps) {
 
     fetchData();
   }, [selectNameCard]);
+  useEffect(() => {
+    if (cardDetail) {
+      localStorage.setItem("cardDetail", JSON.stringify(cardDetail));
+    }
+  }, [cardDetail]);
 
   function getImage(nameImage: string): string {
     const foundItem = tarotCardImages.find((item) => {
