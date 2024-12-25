@@ -28,7 +28,8 @@ function TarotCard({ name, img, desc }: tarotProps) {
         <img
           className="w-full object-cover "
           src={img}
-          alt="Sunset in the mountains"
+          alt="tarotCard"
+          loading="lazy"
         />
       </div>
       <div className="px-3 py-4">

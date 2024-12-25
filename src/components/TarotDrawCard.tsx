@@ -28,13 +28,14 @@ function TarotDrawCard({
     >
       <div className={` flip-card-inner ${isFlipped ? "flipped" : ""}`}>
         <div className="flip-card-front ">
-          <img src={backcard} alt="front of card" className="" />
+          <img src={backcard} alt="front of card" className="" loading="lazy" />
         </div>
         <div className="flip-card-back">
           <img
             src={getRandImage()}
             className=""
             alt="back of card"
+            loading="lazy"
             onClick={handleClickDetail}
           />
         </div>

@@ -31,7 +31,7 @@ function App() {
   ]);
   return (
     <TarotProvider>
-      <div className="w-full h-[100vh] px-0 max-0 ">
+      <div className="relative w-screen max-w-full overflow-x-hidden h-[100vh] px-0 max-0 ">
         <RouterProvider router={router} />
       </div>
     </TarotProvider>

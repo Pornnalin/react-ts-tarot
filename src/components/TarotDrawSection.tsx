@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import backcard from "../assets/Images/backcard.png";
+import backcard from "../assets/Images/backcard.jpg";
 import { TarotContext } from "../context/tarotContext";
 import { useNavigate } from "react-router-dom";
 import TarotDrawCard from "./TarotDrawCard";

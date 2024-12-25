@@ -37,6 +37,7 @@ function DetailTarotCard() {
                       className="w-[280px] "
                       src={tarotContext?.cardDetail?.src}
                       alt={tarotContext?.cardDetail?.src}
+                      loading="lazy"
                     />
                   </div>
                 </div>
@@ -49,6 +50,7 @@ function DetailTarotCard() {
                       className="w-[280px] "
                       src={tarotContext?.cardDetail?.src}
                       alt={tarotContext?.cardDetail?.src}
+                      loading="lazy"
                     />
                   </div>
                 </div>
