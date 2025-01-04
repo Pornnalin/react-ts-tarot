@@ -1,3 +1,5 @@
+import { transform } from "typescript";
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -82,6 +84,17 @@ export default {
             transform: "translate3d(0, 0, 0)",
           },
         },
+        "scale-loop": {
+          "0%:": {
+            transform: "scale(0.5)",
+          },
+          "50%": {
+            transform: "scale(1.02)",
+          },
+          "100%": {
+            transform: "scale(1) ",
+          },
+        },
       },
       animation: {
         fadeindown: "fade-in-down 1s ease-out",
@@ -92,6 +105,7 @@ export default {
         fadeinright: "fade-in-right 1s ease-in-out 0.25s 1",
         dropin: "drop-in 0.6s ease-in 1",
         slideindown: "slide-in-down .5s ease-in-out 1",
+        scaleloop: "scale-loop 1s ease-in-out infinite",
       },
     },
   },

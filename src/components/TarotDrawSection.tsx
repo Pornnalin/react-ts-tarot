@@ -7,6 +7,7 @@ function TarotDrawSection() {
   const tarotContext = useContext(TarotContext);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
+  const [isButtonDisable, setIsButtonDisable] = useState(false);
 
   const navigate = useNavigate();
   const name = tarotContext?.randCardDetail?.name || "";
@@ -23,12 +24,16 @@ function TarotDrawSection() {
   const toggleAnimation = () => {
     if (!isPaused) {
       tarotContext?.handleRandCard();
+      setIsButtonDisable(true);
       setTimeout(() => {
         setIsPaused(!isPaused);
       }, 400);
       setTimeout(() => {
         setIsFlipped(!isFlipped);
       }, 1500);
+      setTimeout(() => {
+        setIsButtonDisable(false);
+      }, 1800);
     } else {
       setIsFlipped(!isFlipped);
       setTimeout(() => {
@@ -71,14 +76,34 @@ function TarotDrawSection() {
             <div
               className={`py-7 ${isPaused ? "animate-fadeindowncard" : ""} `}
             >
-              <ul className="flex pl-0 m-0 ">
-                <li className="cursor-pointer">
+              <ul className="py-10 pl-0 m-0 gap-5 flex flex-col lg:flex-row lg:mx-10 lg:gap-16 xl:mx-36">
+                <li className="flex flex-col justify-center items-center cursor-pointer hover:animate-pulse">
                   <TarotDrawCard
                     isPaused={isPaused}
                     isFlipped={isFlipped}
                     backcard={backcard}
                     handleClickDetail={handleClickDetail}
                   />
+                </li>
+                <li className="flex flex-col mx-12 gap-4 mt-5 lg:mx-0 lg:justify-start lg:items-start lg:gap-5">
+                  <b className=" text-lg md:text-4xl">
+                    {tarotContext?.randCardDetail?.name}
+                  </b>
+                  <p
+                    className={`overflow-hidden overflow-y-scroll scroll-smooth no-bg-scroll text-start text-lg lg:block hidden
+                ${
+                  tarotContext?.randCardDetail?.desc &&
+                  tarotContext?.randCardDetail?.desc.length > 350
+                    ? "h-[250px] "
+                    : "h-[100px]"
+                }`}
+                  >
+                    {tarotContext?.randCardDetail?.desc}
+                  </p>
+                  <p className="text-2xl font-bold lg:block hidden ">Meaning</p>
+                  <p className=" md:text-lg text-center md:text-start">
+                    {tarotContext?.randCardDetail?.meaning_up}
+                  </p>
                 </li>
               </ul>
             </div>
@@ -87,12 +112,15 @@ function TarotDrawSection() {
 
         <div className="py-3 flex justify-center">
           <button
-            className="rounded-[26px] bg-[#A88C26] py-[10px] px-[26px] text-white font-medium text-[16px]"
+            className={`rounded-[26px] bg-[#A88C26] py-[10px] px-[26px] text-white font-medium text-[16px] ${
+              isButtonDisable ? "opacity-50" : " visible"
+            }`}
             onClick={() => {
               toggleAnimation();
             }}
+            disabled={isButtonDisable}
           >
-            Draw Your Fate
+            {isFlipped ? "Draw Another Card" : "Draw Your Fate"}
           </button>
         </div>
       </div>
