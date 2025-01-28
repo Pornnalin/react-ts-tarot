@@ -18,40 +18,52 @@ interface TarotContextType {
   fetchSearchResults: (input: string) => Promise<void>;
   handleFilterType: (selectType: string) => void;
   handleFilterSuit: (selectSuit: string) => void;
+
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   originSearchCardList: CardList[];
+
   cardList: CardList[] | [];
   setCardList: React.Dispatch<React.SetStateAction<CardList[] | []>>;
   allCard: CardList[];
+
   tarotCardGallery: typeof tarotCardImages;
   cardDetail: CardList | undefined;
+
   selectNameCard: string;
   setSelectNameCard: React.Dispatch<React.SetStateAction<string>>;
   setCardDetail: React.Dispatch<React.SetStateAction<CardList | undefined>>;
+
   getImage: (nameImage: string) => string; //ส่งคืนกลับมาเป็นชื่อภาพ
   selectIndexType: string | undefined;
   getIndexType: (index: string) => void;
   setSelectIndexType: React.Dispatch<React.SetStateAction<string | undefined>>;
+
   selectIndexSuit: string;
   getIndexSuit: (index: string) => void;
   setSelectIndexSuit: React.Dispatch<React.SetStateAction<string>>;
+
   sortAZ: () => void;
   sortZA: () => void;
+
   isReverse: boolean;
   handleReverse: () => void;
   isLoading: boolean;
+
   fetchCards: () => void;
   handleRandCard: () => void;
   randCardDetail: CardList | undefined;
+
   setRandCardDetail: React.Dispatch<React.SetStateAction<CardList | undefined>>;
   searchDeckPage: string;
   setSearchDeckPage: React.Dispatch<React.SetStateAction<string>>;
   searchInDeckPage: (input: string) => Promise<void>;
+
   startIndex: number;
   endIndex: number;
   current: number;
   maxPage: number;
+
   goToNextPage: () => void;
   goToBackPage: () => void;
 }

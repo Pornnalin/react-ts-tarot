@@ -21,10 +21,10 @@ function TarotCard({ name, img, desc }: tarotProps) {
   };
   return (
     <div
-      className="flex flex-col max-w-[450px] max-h-[650px] box-border rounded-t-full overflow-hidden shadow-lg bg-[#000000] cursor-pointer animate-fadeinup"
+      className="flex flex-col max-w-[450px] max-h-[650px] box-border rounded-t-full overflow-hidden shadow-lg bg-[#000000] cursor-pointer animate-fadeinup hover:opacity-70"
       onClick={handleClickDetail}
     >
-      <div className="bg-black w-full h-full overflow-hidden">
+      <div className="bg-black w-full h-full overflow-hidden ">
         <img
           className="w-full object-cover "
           src={img}
@@ -37,7 +37,7 @@ function TarotCard({ name, img, desc }: tarotProps) {
         <p className="text-base">{desc}</p>
       </div>
       <div className="pt-2 pb-2 flex justify-end ">
-        <span className=" bg-[#A88C26] rounded-[20px] px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 cursor-pointer">
+        <span className=" bg-[#A88C26] rounded-[20px] px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 cursor-pointer hover:opacity-70">
           Read More
         </span>
       </div>

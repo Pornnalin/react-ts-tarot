@@ -46,7 +46,7 @@ function SearchBar() {
           </div>
           <button
             type="submit"
-            className="bg-[#A88C26] rounded-lg py-2 px-10 text-xl text-black font-semibold"
+            className="bg-[#A88C26] rounded-lg py-2 px-10 text-xl text-black font-semibold hover:opacity-70"
           >
             Search
           </button>

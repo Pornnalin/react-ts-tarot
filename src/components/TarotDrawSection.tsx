@@ -77,7 +77,7 @@ function TarotDrawSection() {
               className={`py-7 ${isPaused ? "animate-fadeindowncard" : ""} `}
             >
               <ul className="py-10 pl-0 m-0 gap-5 flex flex-col lg:flex-row lg:mx-10 lg:gap-16 xl:mx-36">
-                <li className="flex flex-col justify-center items-center cursor-pointer hover:animate-pulse">
+                <li className="flex flex-col justify-center items-center cursor-pointer animate-pulse">
                   <TarotDrawCard
                     isPaused={isPaused}
                     isFlipped={isFlipped}
@@ -85,23 +85,11 @@ function TarotDrawSection() {
                     handleClickDetail={handleClickDetail}
                   />
                 </li>
-                <li className="flex flex-col mx-12 gap-4 mt-5 lg:mx-0 lg:justify-start lg:items-start lg:gap-5">
-                  <b className=" text-lg md:text-4xl">
+                <li className="flex flex-col mx-12 gap-4 mt-5 lg:mx-0 lg:justify-center lg:items-center lg:gap-5 ">
+                  <b className=" text-lg md:text-xl">
                     {tarotContext?.randCardDetail?.name}
                   </b>
-                  <p
-                    className={`overflow-hidden overflow-y-scroll scroll-smooth no-bg-scroll text-start text-lg lg:block hidden
-                ${
-                  tarotContext?.randCardDetail?.desc &&
-                  tarotContext?.randCardDetail?.desc.length > 350
-                    ? "h-[250px] "
-                    : "h-[100px]"
-                }`}
-                  >
-                    {tarotContext?.randCardDetail?.desc}
-                  </p>
-                  <p className="text-2xl font-bold lg:block hidden ">Meaning</p>
-                  <p className=" md:text-lg text-center md:text-start">
+                  <p className=" md:text-2xl text-center md:text-start text-[#f0c735] font-bold italic">
                     {tarotContext?.randCardDetail?.meaning_up}
                   </p>
                 </li>
@@ -112,7 +100,7 @@ function TarotDrawSection() {
 
         <div className="py-3 flex justify-center">
           <button
-            className={`rounded-[26px] bg-[#A88C26] py-[10px] px-[26px] text-white font-medium text-[16px] ${
+            className={`rounded-[26px] bg-[#A88C26] py-[10px] px-[26px] text-white font-medium text-[16px] hover:opacity-70 ${
               isButtonDisable ? "opacity-50" : " visible"
             }`}
             onClick={() => {

@@ -57,7 +57,7 @@ function DetailTarotCard() {
               </div>
             )}
             <button
-              className="rounded-[20px] bg-[#A88C26] py-1 px-6  text-black font-medium text-[16px]"
+              className="rounded-[20px] bg-[#A88C26] py-1 px-6  text-black font-medium text-[16px] hover:opacity-70"
               onClick={tarotContext?.handleReverse}
             >
               Reverse
@@ -91,7 +91,7 @@ function DetailTarotCard() {
                 {tarotContext?.cardDetail?.desc}
               </p>
             </div>
-            <div className="py-10 flex flex-col gap-1">
+            <div className="py-10 flex flex-col gap-6">
               <p className="sm:text-[40px] text-2xl font-bold">Meaning</p>
 
               <p className="h-[100px]">
@@ -99,17 +99,6 @@ function DetailTarotCard() {
                   ? tarotContext?.cardDetail?.meaning_rev
                   : tarotContext?.cardDetail?.meaning_up}
               </p>
-              {/* <div className="py-3 flex gap-5">
-              <button className="capitalize rounded-[20px] cursor-default bg-[#A88C26] py-1 px-6 text-black font-medium text-[14px]">
-                {tarotContext?.cardDetail?.type}
-              </button>
-              {tarotContext?.cardDetail?.suit &&
-                tarotContext?.cardDetail?.suit?.length > 0 && (
-                  <button className="capitalize rounded-[20px] cursor-default bg-[#A88C26] py-1 px-6 text-black font-medium text-[14px]">
-                    {tarotContext?.cardDetail?.suit}
-                  </button>
-                )}
-            </div> */}
             </div>
           </div>
         </div>
