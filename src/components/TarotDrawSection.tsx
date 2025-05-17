@@ -3,11 +3,15 @@ import backcard from "../assets/Images/backcard.jpg";
 import { TarotContext } from "../context/tarotContext";
 import { useNavigate } from "react-router-dom";
 import TarotDrawCard from "./TarotDrawCard";
+import { BsTranslate } from "react-icons/bs";
+import { tarotMeaningsAll } from "../data/tarotMeaningsAll78_complete.ts";
+
 function TarotDrawSection() {
   const tarotContext = useContext(TarotContext);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
   const [isButtonDisable, setIsButtonDisable] = useState(false);
+  const [isThai, setIsThai] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const name = tarotContext?.randCardDetail?.name || "";
@@ -41,7 +45,12 @@ function TarotDrawSection() {
       }, 400);
     }
   };
-
+  const nameKey = name.toLowerCase().trim();
+  const cardData = tarotMeaningsAll[nameKey];
+  const meaning =
+    isThai && cardData?.meaning_up_th
+      ? cardData.meaning_up_th
+      : tarotContext?.randCardDetail?.meaning_up;
   return (
     <>
       <div className="relative text-center my-[40px]  sm:py-[40px] overflow-x-hidden h-full">
@@ -85,12 +94,26 @@ function TarotDrawSection() {
                     handleClickDetail={handleClickDetail}
                   />
                 </li>
-                <li className="flex flex-col mx-12 gap-4 mt-5 lg:mx-0 lg:justify-center lg:items-center lg:gap-5 ">
-                  <b className=" text-lg md:text-xl">
+                <li className="flex flex-col mx-12 gap-4 mt-5 lg:mx-0 lg:justify-center lg:items-center lg:gap-5">
+                  <div className="text-lg md:text-xl flex justify-center items-center gap-3 font-bold">
                     {tarotContext?.randCardDetail?.name}
-                  </b>
-                  <p className=" md:text-2xl text-center md:text-start text-[#f0c735] font-bold italic">
-                    {tarotContext?.randCardDetail?.meaning_up}
+                    <button
+                      className="cursor-pointer"
+                      onClick={() => {
+                        setIsThai((prev) => !prev);
+                        console.log("click");
+                      }}
+                    >
+                      <BsTranslate />
+                    </button>
+                  </div>
+
+                  <p
+                    className={`md:text-2xl text-center md:text-start text-[#f0c735] font-bold italic ${
+                      isThai ? "text-thai" : ""
+                    }`}
+                  >
+                    {meaning}
                   </p>
                 </li>
               </ul>

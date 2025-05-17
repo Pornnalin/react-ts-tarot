@@ -80,3 +80,12 @@ body {
 .flip-card-back {
   transform: rotateY(180deg);
 }
+.text-thai {
+  font-family: "IBM Plex Sans Thai", sans-serif;
+}
+@media (max-width: 600px) {
+  .flip-card {
+    width: 220px;
+    height: 440px;
+  }
+}

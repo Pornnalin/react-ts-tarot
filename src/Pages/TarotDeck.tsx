@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import FilterButton from "../components/FilterButton";
 import Navbar from "../components/Navbar";
 import ShowTarotCard from "../components/ShowTarotCard";
@@ -6,6 +6,9 @@ import { TarotContext } from "../context/tarotContext";
 
 export default function TarotDeck() {
   const tarotContext = useContext(TarotContext);
+  useEffect(() => {
+    tarotContext?.fetchCards();
+  }, []);
 
   return (
     <div className="max-mx-auto sm:px-[70px] px-[30px] md:px-[50px]  ">

@@ -3,10 +3,21 @@ import NavbarDetail from "../components/NavbarDetail";
 import { TarotContext } from "../context/tarotContext";
 import { useContext, useEffect, useState } from "react";
 import Loading from "../components/Loading";
+import { tarotMeaningsAll } from "../data/tarotMeaningsAll78_complete.ts";
+import { BsTranslate } from "react-icons/bs";
 
 function DetailTarotCard() {
   const tarotContext = useContext(TarotContext);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isThai, setIsThai] = useState(false);
+
+  const nameKey = tarotContext?.cardDetail?.name?.toLowerCase().trim();
+  const meaningData = nameKey ? tarotMeaningsAll[nameKey] : undefined;
+
+  const translatedMeaning = tarotContext?.isReverse
+    ? meaningData?.meaning_rev_th
+    : meaningData?.meaning_up_th;
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoaded(true);
@@ -92,10 +103,18 @@ function DetailTarotCard() {
               </p>
             </div>
             <div className="py-10 flex flex-col gap-6">
-              <p className="sm:text-[40px] text-2xl font-bold">Meaning</p>
+              <p className="sm:text-[40px] text-2xl font-bold flex items-center gap-3">
+                Meaning
+                <BsTranslate
+                  onClick={() => setIsThai((prev) => !prev)}
+                  className=" cursor-pointer"
+                />
+              </p>
 
-              <p className="h-[100px]">
-                {tarotContext?.isReverse
+              <p className={`h-[100px] ${isThai ? "text-thai" : ""}`}>
+                {isThai
+                  ? translatedMeaning || "not found"
+                  : tarotContext?.isReverse
                   ? tarotContext?.cardDetail?.meaning_rev
                   : tarotContext?.cardDetail?.meaning_up}
               </p>

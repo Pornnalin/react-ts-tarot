@@ -1,7 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 import { tarotCardImages } from "../components/TarotCardImages";
-
 interface CardList {
   type: string;
   suit: string;
@@ -102,7 +101,7 @@ export function TarotProvider({ children }: TarotProviderProps) {
   const [endIndex, setEndIndex] = useState<number>(8);
 
   function findMaxPage() {
-    const allCardsLength = allCard?.length || 0; //  undefined;
+    const allCardsLength = allCard?.length || 0;
     const result = Math.ceil(allCardsLength / 8);
     setMaxPage(result);
   }
