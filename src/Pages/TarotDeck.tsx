@@ -8,6 +8,7 @@ export default function TarotDeck() {
   const tarotContext = useContext(TarotContext);
   useEffect(() => {
     tarotContext?.fetchCards();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

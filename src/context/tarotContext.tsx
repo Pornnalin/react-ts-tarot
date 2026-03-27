@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 import { tarotCardImages } from "../components/TarotCardImages";
@@ -121,6 +122,7 @@ export function TarotProvider({ children }: TarotProviderProps) {
   };
   useEffect(() => {
     findMaxPage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allCard.length]);
 
   const fetchSearchResults = async (input: string) => {

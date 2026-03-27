@@ -31,6 +31,7 @@ function DetailTarotCard() {
     if (storedCardDetail) {
       tarotContext?.setCardDetail(JSON.parse(storedCardDetail));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="max-mx-auto sm:px-[70px] px-[30px] h-full ">
