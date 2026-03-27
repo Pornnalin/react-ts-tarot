@@ -20,17 +20,28 @@ function TarotDrawCard({
     return tarotContext?.getImage(tarotContext?.randCardDetail?.name || "");
   };
 
+  const isReversed = tarotContext?.isReverse || false;
+
   return (
     <div
       className={`flip-card ${
         isPaused ? "hover:scale-110 transition-all" : ""
       }`}
     >
-      <div className={` flip-card-inner ${isFlipped ? "flipped" : ""}`}>
-        <div className="flip-card-front ">
-          <img src={backcard} alt="front of card" className="" loading="lazy" />
+      <div className="flip-card-inner">
+        <div className="flip-card-front">
+          <img
+            src={backcard}
+            alt="front of card"
+            className=""
+            loading="lazy"
+          />
         </div>
-        <div className="flip-card-back">
+        <div
+          className={`flip-card-back ${isFlipped ? "flipped" : ""} ${
+            isReversed && isFlipped ? "reversed" : ""
+          }`}
+        >
           <img
             src={getRandImage()}
             className=""

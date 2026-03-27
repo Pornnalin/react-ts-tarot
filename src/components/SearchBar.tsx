@@ -46,7 +46,7 @@ function SearchBar() {
           </div>
           <button
             type="submit"
-            className="bg-[#A88C26] rounded-lg py-2 px-10 text-xl text-black font-semibold hover:opacity-70"
+            className="bg-gradient-to-r from-[#8b6914] to-[#4a3060] rounded-[20px] py-2 px-10 text-xl text-white font-semibold hover:scale-105 hover:shadow-[0_4px_20px_rgba(168,140,38,0.5)] transition-all duration-300 shadow-[0_4px_15px_rgba(168,140,38,0.3)] animate-bounce-once"
           >
             Search
           </button>

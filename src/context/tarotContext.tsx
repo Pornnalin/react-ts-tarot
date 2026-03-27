@@ -174,8 +174,13 @@ export function TarotProvider({ children }: TarotProviderProps) {
       );
       setIsLoading(true);
       const rand = res.data.cards[0];
+
+      // 30% chance to be reversed
+      const shouldReverse = Math.random() < 0.3;
+      setIsReverse(shouldReverse);
+
       setRandCardDetail(rand);
-      console.log(rand.name);
+      console.log(rand.name, shouldReverse ? "(Reversed)" : "(Upright)");
     } catch (error) {
       setIsLoading(false);
       console.error(error);

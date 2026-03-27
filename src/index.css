@@ -3,19 +3,67 @@
 @tailwind utilities;
 
 body {
-  background-color: #1a1b19;
+  background:
+    linear-gradient(135deg, #0a0a0a 0%, #1a1b19 25%, #2d1f2d 50%, #1a1b19 75%, #050505 100%);
+  background-size: 400% 400%;
+  animation: mysticalGradient 30s ease infinite;
   color: white;
   scrollbar-color: rgb(58, 58, 58) transparent;
   font-family: "Montserrat", sans-serif;
+  min-height: 100vh;
 }
+
+@keyframes mysticalGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Mysterious star background effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, rgba(168, 140, 38, 0.3) 0px, transparent 0px),
+    radial-gradient(2px 2px at 60px 70px, rgba(109, 76, 125, 0.2) 0px, transparent 0px),
+    radial-gradient(1px 1px at 50px 160px, rgba(168, 140, 38, 0.4) 0px, transparent 0px),
+    radial-gradient(2px 2px at 90px 40px, rgba(139, 92, 246, 0.3) 0px, transparent 0px),
+    radial-gradient(1px 1px at 130px 80px, rgba(168, 140, 38, 0.2) 0px, transparent 0px),
+    radial-gradient(2px 2px at 160px 120px, rgba(109, 76, 125, 0.3) 0px, transparent 0px);
+  background-size: 200px 200px;
+  animation: twinkle 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: rgb(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.9);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgb(63, 63, 63);
+  background: #6d4c7d;
+  border-radius: 5px;
 }
 @layer utilities {
   .no-bg-scroll::-webkit-scrollbar-track {
@@ -80,9 +128,101 @@ body {
 .flip-card-back {
   transform: rotateY(180deg);
 }
+.flip-card-back.flipped {
+  transform: rotateY(0deg);
+}
+.flip-card-back.flipped.reversed {
+  transform: rotateY(180deg);
+}
 .text-thai {
   font-family: "IBM Plex Sans Thai", sans-serif;
 }
+
+/* Animation utilities */
+@keyframes fadeinup {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeinright {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scalein {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(168, 140, 38, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(168, 140, 38, 0.6), 0 0 30px rgba(168, 140, 38, 0.4);
+  }
+}
+
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes bounce-once {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-fadeinup {
+  animation: fadeinup 0.6s ease-out;
+}
+
+.animate-fadeinright {
+  animation: fadeinright 0.8s ease-out;
+}
+
+.animate-scalein {
+  animation: scalein 0.6s ease-out;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+.animate-bounce-once {
+  animation: bounce-once 0.6s ease-in-out;
+}
+
 @media (max-width: 600px) {
   .flip-card {
     width: 220px;

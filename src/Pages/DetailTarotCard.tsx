@@ -34,85 +34,94 @@ function DetailTarotCard() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className="max-mx-auto sm:px-[70px] px-[30px] h-full ">
+    <div className="max-w-screen-xl mx-auto sm:px-[70px] px-[30px] h-full">
       <NavbarDetail />
       {!isLoaded ? (
         <Loading />
       ) : (
-        <div className="flex flex-col justify-center items-center sm:px-0 px-[20px] lg:flex lg:flex-row lg:h-full animate-fadein">
-          <div className="sm:w-[50%] md:w-[100%] h-full flex flex-col justify-center items-center gap-4 ">
+        <div className="flex flex-col lg:flex-row gap-12 py-12 animate-fadein">
+          {/* Left Column - Card Image */}
+          <div className="flex flex-col justify-center items-center gap-8 lg:w-1/2">
             {!tarotContext?.isReverse ? (
-              <div className="rounded-t-full border-[3px] p-2 border-[#A88C26] transition-transform duration-[2s]">
-                <div className="rounded-t-full border-[2px] p-2 border-[#A88C26] transition-transform duration-[2s]">
-                  <div className="rounded-t-full overflow-hidden">
-                    <img
-                      className="w-[280px] "
-                      src={tarotContext?.cardDetail?.src}
-                      alt={tarotContext?.cardDetail?.src}
-                      loading="lazy"
-                    />
-                  </div>
+              <div className="relative rounded-t-full border-2 border-[#a88c26]/60 hover:border-[#a88c26] transition-all duration-300 group">
+                <div className="absolute inset-0 rounded-t-full bg-gradient-to-br from-[#a88c26]/10 to-transparent blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="rounded-t-full overflow-hidden relative bg-[#0a0a0a]">
+                  <img
+                    className="w-[280px] md:w-[320px] opacity-95 hover:opacity-100 transition-opacity duration-300"
+                    src={tarotContext?.cardDetail?.src}
+                    alt={tarotContext?.cardDetail?.src}
+                    loading="lazy"
+                  />
                 </div>
               </div>
             ) : (
-              <div className="rounded-t-full border-[3px] p-2 border-[#A88C26] rotate-180 transition-transform duration-[2s] ">
-                <div className="rounded-t-full border-[2px] p-2 border-[#A88C26] ">
-                  <div className="rounded-b-full overflow-hidden rotate-180">
-                    <img
-                      className="w-[280px] "
-                      src={tarotContext?.cardDetail?.src}
-                      alt={tarotContext?.cardDetail?.src}
-                      loading="lazy"
-                    />
-                  </div>
+              <div className="relative rounded-t-full border-2 border-[#a88c26]/60 hover:border-[#a88c26] transition-all duration-300 rotate-180 group">
+                <div className="absolute inset-0 rounded-t-full bg-gradient-to-br from-[#a88c26]/10 to-transparent blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rotate-180"></div>
+                <div className="rounded-b-full overflow-hidden rotate-180 relative bg-[#0a0a0a]">
+                  <img
+                    className="w-[280px] md:w-[320px] opacity-95 hover:opacity-100 transition-opacity duration-300"
+                    src={tarotContext?.cardDetail?.src}
+                    alt={tarotContext?.cardDetail?.src}
+                    loading="lazy"
+                  />
                 </div>
               </div>
             )}
             <button
-              className="rounded-[20px] bg-[#A88C26] py-1 px-6  text-black font-medium text-[16px] hover:opacity-70"
+              className="rounded-[20px] bg-gradient-to-r from-[#8b6914] to-[#4a3060] py-3 px-10 text-white font-semibold text-[16px] hover:scale-105 hover:shadow-[0_4px_20px_rgba(168,140,38,0.5)] transition-all duration-300 shadow-[0_4px_15px_rgba(168,140,38,0.3)] animate-bounce-once"
               onClick={tarotContext?.handleReverse}
             >
               Reverse
             </button>
           </div>
-          <div className="flex flex-col justify-center lg:mr-[90px] lg:w-[70%] xl:w-[100%] xl:mr-0">
-            <div className="pt-10 pb-3 flex flex-col gap-1">
-              <p className="text-3xl sm:text-[60px] font-bold leading-relaxed">
+
+          {/* Right Column - Card Details */}
+          <div className="flex flex-col gap-8 lg:w-1/2">
+            {/* Card Name & Type */}
+            <div className="flex flex-col gap-4">
+              <h1 className="text-4xl sm:text-5xl font-bold leading-tight text-[#e8e4e4]">
                 {tarotContext?.cardDetail?.name}
-              </p>
-              <div className="py-3 flex gap-5">
-                <button className="capitalize rounded-[20px] cursor-default bg-[#A88C26] py-1 px-6 text-black font-medium text-[14px]">
+              </h1>
+              <div className="flex flex-wrap gap-4">
+                <span className="capitalize rounded-[20px] cursor-default bg-gradient-to-r from-[#8b6914] to-[#4a3060] py-2 px-6 text-white font-medium text-[14px] shadow-[0_4px_15px_rgba(168,140,38,0.3)]">
                   {tarotContext?.cardDetail?.type}
-                </button>
+                </span>
                 {tarotContext?.cardDetail?.suit &&
                   tarotContext?.cardDetail?.suit?.length > 0 && (
-                    <button className="capitalize rounded-[20px] cursor-default bg-[#A88C26] py-1 px-6 text-black font-medium text-[14px]">
+                    <span className="capitalize rounded-[20px] cursor-default bg-gradient-to-r from-[#8b6914] to-[#4a3060] py-2 px-6 text-white font-medium text-[14px] shadow-[0_4px_15px_rgba(168,140,38,0.3)]">
                       {tarotContext?.cardDetail?.suit}
-                    </button>
+                    </span>
                   )}
               </div>
+            </div>
+
+            {/* Description */}
+            <div className="flex flex-col gap-2">
+              <h2 className="text-xl font-semibold text-[#a88c26]">Description</h2>
               <p
-                className={`overflow-hidden overflow-y-scroll scroll-smooth no-bg-scroll
-                ${
+                className={`overflow-hidden overflow-y-scroll scroll-smooth no-bg-scroll text-[#94a3b8] leading-relaxed ${
                   tarotContext?.cardDetail?.desc &&
                   tarotContext?.cardDetail?.desc.length > 350
-                    ? "h-[250px] "
-                    : "h-[100px]"
+                    ? "max-h-[250px] "
+                    : "max-h-[150px]"
                 }`}
               >
                 {tarotContext?.cardDetail?.desc}
               </p>
             </div>
-            <div className="py-10 flex flex-col gap-6">
-              <p className="sm:text-[40px] text-2xl font-bold flex items-center gap-3">
-                Meaning
-                <BsTranslate
-                  onClick={() => setIsThai((prev) => !prev)}
-                  className=" cursor-pointer"
-                />
-              </p>
 
-              <p className={`h-[100px] ${isThai ? "text-thai" : ""}`}>
+            {/* Meaning */}
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-semibold text-[#a88c26]">Meaning</h2>
+                <button
+                  className="p-2 rounded-lg hover:bg-[#a88c26]/20 transition-colors duration-300 text-[#a88c26]"
+                  onClick={() => setIsThai((prev) => !prev)}
+                >
+                  <BsTranslate size={20} />
+                </button>
+              </div>
+              <p className={`text-[#94a3b8] leading-relaxed ${isThai ? "text-thai" : ""}`}>
                 {isThai
                   ? translatedMeaning || "not found"
                   : tarotContext?.isReverse

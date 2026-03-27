@@ -9,7 +9,7 @@ import { tarotMeaningsAll } from "../data/tarotMeaningsAll78_complete.ts";
 function TarotDrawSection() {
   const tarotContext = useContext(TarotContext);
   const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [isFlipped, setIsFlipped] = useState<boolean>(false);
+  const [isRevealed, setIsRevealed] = useState<boolean>(false);
   const [isButtonDisable, setIsButtonDisable] = useState(false);
   const [isThai, setIsThai] = useState<boolean>(false);
 
@@ -29,19 +29,23 @@ function TarotDrawSection() {
     if (!isPaused) {
       tarotContext?.handleRandCard();
       setIsButtonDisable(true);
+      setIsRevealed(false);
+
       setTimeout(() => {
-        setIsPaused(!isPaused);
+        setIsPaused(true);
       }, 400);
+
       setTimeout(() => {
-        setIsFlipped(!isFlipped);
+        setIsRevealed(true);
       }, 1500);
+
       setTimeout(() => {
         setIsButtonDisable(false);
       }, 1800);
     } else {
-      setIsFlipped(!isFlipped);
+      setIsRevealed(false);
       setTimeout(() => {
-        setIsPaused(!isPaused);
+        setIsPaused(false);
       }, 400);
     }
   };
@@ -53,21 +57,22 @@ function TarotDrawSection() {
       : tarotContext?.randCardDetail?.meaning_up;
   return (
     <>
-      <div className="relative text-center my-[40px]  sm:py-[40px] overflow-x-hidden h-full">
-        <h3 className="text-xl sm:text-[40px] py-2 mx-4 sm:mx-0 md:mx-10 leading-relaxed ">
+      <div className="relative text-center my-[40px] sm:py-[40px] overflow-x-hidden h-full">
+        <h3 className="text-xl sm:text-[40px] py-2 px-4 sm:px-0 md:px-10 leading-relaxed text-[#e8e4e4] animate-fadeindown">
           Let the Cards Guide You, Choose One to Reveal Your Path
         </h3>
+
         {!isPaused ? (
           <div className="w-[200%]">
             <div
-              className={` py-7 w-[100%] sliderCard ${
+              className={`py-7 w-[100%] sliderCard ${
                 isPaused ? "animate-fadeout" : ""
-              } `}
+              }`}
             >
-              <ul className="flex pl-0 m-0 ">
+              <ul className="flex pl-0 m-0">
                 {Array.from(Array(8), (_, i) => {
                   return (
-                    <li key={i}>
+                    <li key={i} className="animate-fadeinup" style={{ animationDelay: `${i * 100}ms` }}>
                       <TarotDrawCard
                         isPaused={false}
                         isFlipped={false}
@@ -81,57 +86,68 @@ function TarotDrawSection() {
             </div>
           </div>
         ) : (
-          <div className="flex justify-center items-end overflow-hidden">
-            <div
-              className={`py-7 ${isPaused ? "animate-fadeindowncard" : ""} `}
-            >
-              <ul className="py-10 pl-0 m-0 gap-5 flex flex-col lg:flex-row lg:mx-10 lg:gap-16 xl:mx-36">
-                <li className="flex flex-col justify-center items-center cursor-pointer animate-pulse">
+          <div className="flex justify-center items-center py-10 animate-fadeindowncard">
+            <div className="w-full max-w-5xl px-4 sm:px-6 lg:px-8">
+              <ul className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 xl:gap-16">
+                {/* Card */}
+                <li className="flex justify-center animate-scalein">
                   <TarotDrawCard
                     isPaused={isPaused}
-                    isFlipped={isFlipped}
+                    isFlipped={isRevealed}
                     backcard={backcard}
                     handleClickDetail={handleClickDetail}
                   />
                 </li>
-                <li className="flex flex-col mx-12 gap-4 mt-5 lg:mx-0 lg:justify-center lg:items-center lg:gap-5">
-                  <div className="text-lg md:text-xl flex justify-center items-center gap-3 font-bold">
-                    {tarotContext?.randCardDetail?.name}
+
+                {/* Card Details */}
+                <li className="flex flex-col gap-6 text-center lg:text-left max-w-md animate-fadeinright">
+                  <div className="flex items-center justify-center lg:justify-start gap-3">
+                    <h4 className="text-2xl md:text-3xl font-bold text-[#e8e4e4] animate-glow">
+                      {tarotContext?.randCardDetail?.name}
+                    </h4>
                     <button
-                      className="cursor-pointer"
+                      className="p-2 rounded-lg hover:bg-[#a88c26]/20 hover:scale-110 transition-all duration-300 text-[#a88c26] animate-bounce-slow"
                       onClick={() => {
                         setIsThai((prev) => !prev);
-                        console.log("click");
                       }}
                     >
-                      <BsTranslate />
+                      <BsTranslate size={20} />
                     </button>
                   </div>
 
                   <p
-                    className={`md:text-2xl text-center md:text-start text-[#f0c735] font-bold italic ${
+                    className={`text-lg md:text-xl text-[#a88c26] font-semibold italic animate-fadein ${
                       isThai ? "text-thai" : ""
                     }`}
                   >
                     {meaning}
                   </p>
+
+                  <div className="flex flex-col gap-2">
+                    <p className={`text-sm text-[#94a3b8] animate-pulse ${
+                      tarotContext?.isReverse ? "text-red-400" : "text-green-400"
+                    }`}>
+                      {tarotContext?.isReverse ? "🔮 Card is Reversed" : "✨ Card is Upright"}
+                    </p>
+                    <p className="text-sm text-[#94a3b8]">Click on the card for more details</p>
+                  </div>
                 </li>
               </ul>
             </div>
           </div>
         )}
 
-        <div className="py-3 flex justify-center">
+        <div className="py-8 flex justify-center">
           <button
-            className={`rounded-[26px] bg-[#A88C26] py-[10px] px-[26px] text-white font-medium text-[16px] hover:opacity-70 ${
-              isButtonDisable ? "opacity-50" : " visible"
+            className={`rounded-[20px] bg-gradient-to-r from-[#8b6914] to-[#4a3060] py-3 px-10 text-white font-semibold text-[18px] hover:scale-105 hover:shadow-[0_4px_20px_rgba(168,140,38,0.5)] transition-all duration-300 shadow-[0_4px_15px_rgba(168,140,38,0.3)] animate-bounce-once ${
+              isButtonDisable ? "opacity-50 cursor-not-allowed" : ""
             }`}
             onClick={() => {
               toggleAnimation();
             }}
             disabled={isButtonDisable}
           >
-            {isFlipped ? "Draw Another Card" : "Draw Your Fate"}
+            {isRevealed ? "Draw Another Card" : "Draw Your Fate"}
           </button>
         </div>
       </div>

@@ -6,15 +6,15 @@ function FilterButton() {
   const tarotContext = useContext(TarotContext);
   const location = useLocation();
   return (
-    <div className="flex flex-col gap-2 ">
-      <div className="flex gap-5">
+    <div className="flex flex-col gap-2">
+      <div className="flex flex-wrap gap-4">
         {buttons.map((item, index) => (
           <button
             key={index}
-            className={`rounded-[20px] border-[2px] py-2 px-10 font-medium text-[16px] ${
+            className={`rounded-full py-2 px-6 font-semibold text-[16px] transition-all duration-300 ${
               index.toString() === tarotContext?.selectIndexType
-                ? "border-transparent bg-[#A88C26] text-black"
-                : "border-[#A88C26] text-white  "
+                ? "bg-gradient-to-r from-[#a88c26] to-[#6d4c7d] text-white shadow-[0_4px_20px_rgba(168,140,38,0.5)]"
+                : "bg-transparent border-2 border-[#a88c26]/50 text-[#e8e4e4] hover:border-[#a88c26] hover:bg-[#a88c26]/20"
             }`}
             onClick={() => {
               if (tarotContext?.selectIndexType === index.toString()) {
@@ -33,16 +33,16 @@ function FilterButton() {
           </button>
         ))}
       </div>
-      <div className="flex-row sm:flex gap-5 my-4 ">
+      <div className="flex flex-wrap gap-4 mt-4">
         {tarotContext?.selectIndexType !== "0" &&
           tarotContext?.selectIndexType !== undefined &&
           buttonChild.map((item, index) => (
             <button
               key={index}
-              className={`rounded-[20px] border-[2px] py-2 px-10 mr-3 mb-3 sm:mb:0 sm:mr:0 font-medium text-[13px]  ${
+              className={`rounded-full py-2 px-6 font-semibold text-[14px] transition-all duration-300 ${
                 index.toString() === tarotContext?.selectIndexSuit
-                  ? "border-transparent bg-[#A88C26] text-black"
-                  : "border-[#A88C26] text-white "
+                  ? "bg-gradient-to-r from-[#a88c26] to-[#6d4c7d] text-white shadow-[0_4px_20px_rgba(168,140,38,0.5)]"
+                  : "bg-transparent border-2 border-[#a88c26]/50 text-[#e8e4e4] hover:border-[#a88c26] hover:bg-[#a88c26]/20"
               }`}
               onClick={() => {
                 if (tarotContext?.selectIndexSuit === index.toString()) {
@@ -58,19 +58,19 @@ function FilterButton() {
             </button>
           ))}
       </div>
-      <div className="flex gap-3">
-        <p
-          className="hover:underline cursor-pointer"
+      <div className="flex gap-6">
+        <button
+          className="text-[#e8e4e4] hover:text-[#a88c26] hover:underline font-medium transition-all duration-300"
           onClick={tarotContext?.sortAZ}
         >
           A-Z
-        </p>
-        <p
-          className="hover:underline cursor-pointer"
+        </button>
+        <button
+          className="text-[#e8e4e4] hover:text-[#a88c26] hover:underline font-medium transition-all duration-300"
           onClick={tarotContext?.sortZA}
         >
           Z-A
-        </p>
+        </button>
       </div>
     </div>
   );

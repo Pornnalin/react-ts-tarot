@@ -13,27 +13,34 @@ function Navbar() {
   };
 
   return (
-    <div className="py-10 flex flex-row justify-between">
-      <div className="inline-flex pr-8">
-        <h3 className="font-bold text-2xl uppercase text-[#A88C26]">
+    <div className="py-10 flex flex-row justify-between relative">
+      <div className="relative inline-flex pr-8">
+        <h3 className="font-bold text-2xl uppercase text-transparent bg-clip-text bg-gradient-to-r from-[#a88c26] to-[#6d4c7d] drop-shadow-[0_2px_10px_rgba(168,140,38,0.5)]">
           tarotwhisper
         </h3>
       </div>
 
       {/* Desktop Navigation */}
-      <div className="hidden sm:flex">
+      <div className="hidden sm:flex relative z-10">
         <nav className="font-semibold text-md">
           <ul className="flex space-x-14">
-            <li className="hover:underline">
-              <Link to="/">Explore</Link>
+            <li className="relative group">
+              <Link to="/" className="text-[#e8e4e4] hover:text-[#a88c26] transition-colors duration-300">
+                Explore
+              </Link>
+              <div className="absolute -bottom-1 left-0 w-0 h-px bg-[#a88c26] group-hover:w-full transition-all duration-300"></div>
             </li>
-            <li className="hover:underline">
-              <Link to="/tarotdeck" onClick={tarotContext?.fetchCards}>
+            <li className="relative group">
+              <Link to="/tarotdeck" onClick={tarotContext?.fetchCards} className="text-[#e8e4e4] hover:text-[#a88c26] transition-colors duration-300">
                 Tarot Deck
               </Link>
+              <div className="absolute -bottom-1 left-0 w-0 h-px bg-[#a88c26] group-hover:w-full transition-all duration-300"></div>
             </li>
-            <li className="hover:underline">
-              <Link to="/tarotdraw">Your Tarot Draw</Link>
+            <li className="relative group">
+              <Link to="/tarotdraw" className="text-[#e8e4e4] hover:text-[#a88c26] transition-colors duration-300">
+                Your Tarot Draw
+              </Link>
+              <div className="absolute -bottom-1 left-0 w-0 h-px bg-[#a88c26] group-hover:w-full transition-all duration-300"></div>
             </li>
           </ul>
         </nav>

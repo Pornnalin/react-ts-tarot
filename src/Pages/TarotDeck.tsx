@@ -12,16 +12,16 @@ export default function TarotDeck() {
   }, []);
 
   return (
-    <div className="max-mx-auto sm:px-[70px] px-[30px] md:px-[50px]  ">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <Navbar />
-      <div className="sm:mx-20 md:mx-0">
-        <form action="" className="pt-10 pb-5 animate-fadeindown">
-          <div className="flex gap-6 justify-start">
+      <div className="max-w-6xl mx-auto">
+        <form action="" className="pt-8 pb-6 animate-fadeindown">
+          <div className="flex gap-4 justify-start">
             <input
               type="text"
               value={tarotContext?.searchDeckPage}
               placeholder="Search by card or meaning..."
-              className="md:w-[60%] w-[100%] py-2 pl-4 rounded-full border-2 border-transparent bg-[#181717] text-left racking-wider text-[20px]  focus:outline-none focus:border-2 focus:border-[#A88C26]"
+              className="md:w-[60%] w-full py-3 px-5 rounded-full border-2 border-[#a88c26]/30 bg-[#181717]/80 backdrop-blur-sm text-left text-[16px] text-[#e8e4e4] focus:outline-none focus:border-[#a88c26] focus:shadow-[0_0_20px_-5px_rgba(168,140,38,0.3)] transition-all duration-300"
               onChange={(e) => {
                 tarotContext?.setSearchDeckPage(e.target.value);
                 tarotContext?.searchInDeckPage(e.target.value);
@@ -34,29 +34,29 @@ export default function TarotDeck() {
         </div>
         <div>
           {tarotContext?.allCard && tarotContext?.allCard.length > 8 ? (
-            <div className="py-3 text-md flex justify-end gap-4 animate-fadeindown">
+            <div className="py-4 flex justify-end gap-6 items-center animate-fadeindown">
               <button
-                className={`${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   tarotContext.current === 1
-                    ? "cursor-default text-gray-600"
-                    : ""
+                    ? "cursor-default text-gray-600 bg-gray-800/50"
+                    : "bg-gradient-to-r from-[#8b6914] to-[#4a3060] text-white hover:scale-105 hover:shadow-[0_4px_20px_rgba(168,140,38,0.5)] shadow-[0_4px_15px_rgba(168,140,38,0.3)] animate-bounce-once"
                 }`}
                 onClick={tarotContext.goToBackPage}
               >
-                Prev
+                ← Prev
               </button>
-              <span className="w-[100px] block text-center">
-                {tarotContext.current} of {tarotContext.maxPage}
+              <span className="text-sm font-medium text-[#e8e4e4] min-w-[80px] text-center">
+                {tarotContext.current} / {tarotContext.maxPage}
               </span>
               <button
-                className={`${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   tarotContext.current === tarotContext.maxPage
-                    ? "cursor-default  text-gray-600"
-                    : ""
+                    ? "cursor-default text-gray-600 bg-gray-800/50"
+                    : "bg-gradient-to-r from-[#8b6914] to-[#4a3060] text-white hover:scale-105 hover:shadow-[0_4px_20px_rgba(168,140,38,0.5)] shadow-[0_4px_15px_rgba(168,140,38,0.3)] animate-bounce-once"
                 }`}
                 onClick={tarotContext.goToNextPage}
               >
-                Next
+                Next →
               </button>
             </div>
           ) : (
