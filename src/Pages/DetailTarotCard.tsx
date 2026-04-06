@@ -31,6 +31,7 @@ function DetailTarotCard() {
     if (storedCardDetail) {
       tarotContext?.setCardDetail(JSON.parse(storedCardDetail));
     }
+    // Note: Don't override isReverse from localStorage here since it should come from the card draw
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -42,31 +43,21 @@ function DetailTarotCard() {
         <div className="flex flex-col lg:flex-row gap-12 py-12 animate-fadein">
           {/* Left Column - Card Image */}
           <div className="flex flex-col justify-center items-center gap-8 lg:w-1/2">
-            {!tarotContext?.isReverse ? (
-              <div className="relative rounded-t-full border-2 border-[#a88c26]/60 hover:border-[#a88c26] transition-all duration-300 group">
-                <div className="absolute inset-0 rounded-t-full bg-gradient-to-br from-[#a88c26]/10 to-transparent blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="rounded-t-full overflow-hidden relative bg-[#0a0a0a]">
-                  <img
-                    className="w-[280px] md:w-[320px] opacity-95 hover:opacity-100 transition-opacity duration-300"
-                    src={tarotContext?.cardDetail?.src}
-                    alt={tarotContext?.cardDetail?.src}
-                    loading="lazy"
-                  />
-                </div>
+            <div className={`relative rounded-t-full border-2 border-[#a88c26]/60 hover:border-[#a88c26] transition-all duration-500 group ${
+              tarotContext?.isReverse ? "rotate-180" : ""
+            }`}>
+              <div className={`absolute inset-0 rounded-t-full bg-gradient-to-br from-[#a88c26]/10 to-transparent blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+                tarotContext?.isReverse ? "rotate-180" : ""
+              }`}></div>
+              <div className="rounded-t-full overflow-hidden relative bg-[#0a0a0a]">
+                <img
+                  className="w-[280px] md:w-[320px] opacity-95 hover:opacity-100 transition-opacity duration-300"
+                  src={tarotContext?.cardDetail?.src}
+                  alt={tarotContext?.cardDetail?.src}
+                  loading="lazy"
+                />
               </div>
-            ) : (
-              <div className="relative rounded-t-full border-2 border-[#a88c26]/60 hover:border-[#a88c26] transition-all duration-300 rotate-180 group">
-                <div className="absolute inset-0 rounded-t-full bg-gradient-to-br from-[#a88c26]/10 to-transparent blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rotate-180"></div>
-                <div className="rounded-b-full overflow-hidden rotate-180 relative bg-[#0a0a0a]">
-                  <img
-                    className="w-[280px] md:w-[320px] opacity-95 hover:opacity-100 transition-opacity duration-300"
-                    src={tarotContext?.cardDetail?.src}
-                    alt={tarotContext?.cardDetail?.src}
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            )}
+            </div>
             <button
               className="rounded-[20px] bg-gradient-to-r from-[#8b6914] to-[#4a3060] py-3 px-10 text-white font-semibold text-[16px] hover:scale-105 hover:shadow-[0_4px_20px_rgba(168,140,38,0.5)] transition-all duration-300 shadow-[0_4px_15px_rgba(168,140,38,0.3)] animate-bounce-once"
               onClick={tarotContext?.handleReverse}

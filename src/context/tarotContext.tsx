@@ -47,6 +47,7 @@ interface TarotContextType {
   sortZA: () => void;
 
   isReverse: boolean;
+  setIsReverse: React.Dispatch<React.SetStateAction<boolean>>;
   handleReverse: () => void;
   isLoading: boolean;
 
@@ -95,6 +96,19 @@ export function TarotProvider({ children }: TarotProviderProps) {
   const [isReverse, setIsReverse] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  // Initialize isReverse from localStorage
+  useEffect(() => {
+    const storedIsReverse = localStorage.getItem("isReverse");
+    if (storedIsReverse !== null) {
+      setIsReverse(JSON.parse(storedIsReverse));
+    }
+  }, []);
+
+  // Save isReverse to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("isReverse", JSON.stringify(isReverse));
+  }, [isReverse]);
+
   //pagDeck
   const [current, setCurrent] = useState<number>(1);
   const [maxPage, setMaxPage] = useState<number>(0);
@@ -126,45 +140,95 @@ export function TarotProvider({ children }: TarotProviderProps) {
   }, [allCard.length]);
 
   const fetchSearchResults = async (input: string) => {
-    if (input.trim() == "") {
+    if (input.trim() === "") {
       return;
     }
     const apiSearch = `https://tarotapi.dev/api/v1/cards/search?q=${input}`;
     try {
       setIsLoading(true);
-      const response = await axios.get(apiSearch);
-      // console.log(apiSearch);
-      console.log(response.data.cards);
-      setCardList(response.data.cards);
-      setSearchOriginCardList(response.data.cards);
+      const response = await axios.get(apiSearch, {
+        timeout: 10000 // 10 second timeout
+      });
+      if (response.data && response.data.cards && Array.isArray(response.data.cards)) {
+        setCardList(response.data.cards);
+        setSearchOriginCardList(response.data.cards);
+      } else {
+        setCardList([]);
+        setSearchOriginCardList([]);
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching search results:", error);
+      setCardList([]);
+      setSearchOriginCardList([]);
     } finally {
       setIsLoading(false);
     }
   };
   const searchInDeckPage = async (input: string) => {
+    if (!input || input.trim() === "") {
+      // If search is empty, reset to all cards
+      fetchCards();
+      return;
+    }
+
     const apiSearch = `https://tarotapi.dev/api/v1/cards/search?q=${input}`;
     try {
       setIsLoading(true);
-      const response = await axios.get(apiSearch);
-      setTimeout(() => {
+      const response = await axios.get(apiSearch, {
+        timeout: 10000 // 10 second timeout
+      });
+      if (response.data && response.data.cards && Array.isArray(response.data.cards)) {
         setAllCard(response.data.cards);
-      }, 1000);
+        setCurrent(1);
+        setStartIndex(0);
+        setEndIndex(8);
+      } else {
+        setAllCard([]);
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Error searching cards:", error);
+      setAllCard([]);
     } finally {
       setIsLoading(false);
     }
   };
   const fetchCards = async () => {
     try {
-      const response = await axios.get(`https://tarotapi.dev/api/v1/cards/`);
-      setAllCard(response.data.cards);
-      // setCardList(response.data.cards);
-      setSearchOriginCardList(response.data.cards);
+      setIsLoading(true);
+      const response = await axios.get(`https://tarotapi.dev/api/v1/cards/`, {
+        timeout: 10000 // 10 second timeout
+      });
+      if (response.data && response.data.cards && Array.isArray(response.data.cards)) {
+        setAllCard(response.data.cards);
+        setSearchOriginCardList(response.data.cards);
+        setCurrent(1);
+        setStartIndex(0);
+        setEndIndex(8);
+        // Cache the data in localStorage
+        localStorage.setItem("cachedCards", JSON.stringify(response.data.cards));
+      } else {
+        console.error("Invalid response format from API");
+        throw new Error("Invalid API response");
+      }
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching cards:", error);
+      // Try to load from localStorage cache as fallback
+      try {
+        const cachedCards = localStorage.getItem("cachedCards");
+        if (cachedCards) {
+          const parsedCards = JSON.parse(cachedCards);
+          setAllCard(parsedCards);
+          setSearchOriginCardList(parsedCards);
+          console.log("Loaded cards from cache due to API failure");
+        } else {
+          setAllCard([]);
+        }
+      } catch (cacheError) {
+        console.error("Error loading from cache:", cacheError);
+        setAllCard([]);
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
   const handleRandCard = async () => {
@@ -191,23 +255,33 @@ export function TarotProvider({ children }: TarotProviderProps) {
   }, []);
 
   const handleFilterType = (selectType: string) => {
+    if (!originSearchCardList || originSearchCardList.length === 0) return;
+
     let resType = [];
     resType = originSearchCardList.filter(
-      (item) => item.type.toLowerCase() === selectType.toLowerCase()
+      (item) => item.type && item.type.toLowerCase() === selectType.toLowerCase()
     );
     if (window.location.pathname === "/tarotdeck") {
       setAllCard(resType);
+      setCurrent(1);
+      setStartIndex(0);
+      setEndIndex(8);
     } else {
       setCardList(resType);
     }
   };
   const handleFilterSuit = (selectSuit: string) => {
+    if (!originSearchCardList || originSearchCardList.length === 0) return;
+
     let resSuit = [];
     resSuit = originSearchCardList.filter(
       (item) => item.suit !== "" && item.suit === selectSuit
     );
     if (window.location.pathname === "/tarotdeck") {
       setAllCard(resSuit);
+      setCurrent(1);
+      setStartIndex(0);
+      setEndIndex(8);
     } else {
       setCardList(resSuit);
     }
@@ -330,6 +404,7 @@ export function TarotProvider({ children }: TarotProviderProps) {
         sortAZ,
         sortZA,
         isReverse,
+        setIsReverse,
         handleReverse,
         isLoading,
         fetchCards,

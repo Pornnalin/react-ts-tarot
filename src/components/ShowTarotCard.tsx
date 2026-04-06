@@ -17,6 +17,32 @@ function ShowTarotCard() {
     return <Loading />;
   }
 
+  if (!tarotContext?.allCard || tarotContext?.allCard.length === 0) {
+    return (
+      <div className="py-20 flex flex-col items-center justify-center text-center">
+        <div className="text-6xl mb-4">🔮</div>
+        <h3 className="text-2xl font-bold text-[#e8e4e4] mb-2">Cards Not Found</h3>
+        <p className="text-[#94a3b8] mb-6">
+          Unable to load tarot cards. Please check your internet connection and try again.
+        </p>
+        <div className="flex gap-4">
+          <button
+            onClick={() => tarotContext?.fetchCards()}
+            className="rounded-[20px] bg-gradient-to-r from-[#8b6914] to-[#4a3060] py-3 px-10 text-white font-semibold text-[16px] hover:scale-105 hover:shadow-[0_4px_20px_rgba(168,140,38,0.5)] transition-all duration-300 shadow-[0_4px_15px_rgba(168,140,38,0.3)] animate-bounce-once"
+          >
+            🔄 Try Again
+          </button>
+          <button
+            onClick={() => window.location.reload()}
+            className="rounded-[20px] bg-[#181717] py-3 px-10 text-white font-semibold text-[16px] hover:scale-105 transition-all duration-300 border-2 border-[#a88c26]/50"
+          >
+            🔄 Reload Page
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       {location.pathname !== "/tarotdeck" ? (
