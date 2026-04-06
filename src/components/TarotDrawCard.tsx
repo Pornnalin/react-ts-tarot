@@ -24,29 +24,27 @@ function TarotDrawCard({
 
   return (
     <div
-      className={`flip-card ${
-        isPaused ? "hover:scale-110 transition-all" : ""
-      }`}
+      className={`flip-card ${!isFlipped && isPaused ? "hover:scale-105 transition-all duration-300 animate-pulse-glow" : ""}`}
     >
-      <div className="flip-card-inner">
+      <div className={`flip-card-inner ${isFlipped ? "flipped" : ""}`}>
         <div className="flip-card-front">
           <img
             src={backcard}
             alt="front of card"
-            className=""
-            loading="lazy"
+            className="w-full h-full object-cover rounded-lg"
+            loading="eager"
+            decoding="sync"
           />
         </div>
         <div
-          className={`flip-card-back ${isFlipped ? "flipped" : ""} ${
-            isReversed && isFlipped ? "reversed" : ""
-          }`}
+          className={`flip-card-back ${isReversed ? "reversed" : ""}`}
         >
           <img
             src={getRandImage()}
-            className=""
+            className="w-full h-full object-cover rounded-lg cursor-pointer"
             alt="back of card"
-            loading="lazy"
+            loading="eager"
+            decoding="sync"
             onClick={handleClickDetail}
           />
         </div>

@@ -12,6 +12,7 @@ function TarotDrawSection() {
   const [isRevealed, setIsRevealed] = useState<boolean>(false);
   const [isButtonDisable, setIsButtonDisable] = useState(false);
   const [isThai, setIsThai] = useState<boolean>(false);
+  const [isShuffling, setIsShuffling] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const name = tarotContext?.randCardDetail?.name || "";
@@ -27,26 +28,28 @@ function TarotDrawSection() {
 
   const toggleAnimation = () => {
     if (!isPaused) {
+      setIsShuffling(true);
       tarotContext?.handleRandCard();
       setIsButtonDisable(true);
       setIsRevealed(false);
 
       setTimeout(() => {
         setIsPaused(true);
+        setIsShuffling(false);
       }, 400);
 
       setTimeout(() => {
         setIsRevealed(true);
-      }, 1500);
+      }, 1300); // Slight delay for smoother flip
 
       setTimeout(() => {
         setIsButtonDisable(false);
-      }, 1800);
+      }, 2100); // Allow flip animation to complete smoothly
     } else {
       setIsRevealed(false);
       setTimeout(() => {
         setIsPaused(false);
-      }, 400);
+      }, 900); // Allow flip back animation to complete (0.8s + buffer)
     }
   };
   const nameKey = name.toLowerCase().trim();
@@ -63,7 +66,7 @@ function TarotDrawSection() {
         </h3>
 
         {!isPaused ? (
-          <div className="w-[200%]">
+          <div className={`w-[200%] transition-opacity duration-300 ${isPaused ? 'opacity-0' : 'opacity-100'}`}>
             <div
               className={`py-7 w-[100%] sliderCard ${
                 isPaused ? "animate-fadeout" : ""
@@ -87,7 +90,7 @@ function TarotDrawSection() {
           </div>
         ) : (
           <div className="flex justify-center items-center py-10 animate-fadeindowncard">
-            <div className="w-full max-w-5xl px-4 sm:px-6 lg:px-8">
+            <div className="w-full max-w-5xl px-4 sm:px-6 lg:px-8 opacity-0 animate-fadein">
               <ul className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 xl:gap-16">
                 {/* Card */}
                 <li className="flex justify-center animate-scalein">
@@ -141,13 +144,13 @@ function TarotDrawSection() {
           <button
             className={`rounded-[20px] bg-gradient-to-r from-[#8b6914] to-[#4a3060] py-3 px-10 text-white font-semibold text-[18px] hover:scale-105 hover:shadow-[0_4px_20px_rgba(168,140,38,0.5)] transition-all duration-300 shadow-[0_4px_15px_rgba(168,140,38,0.3)] animate-bounce-once ${
               isButtonDisable ? "opacity-50 cursor-not-allowed" : ""
-            }`}
+            } ${isShuffling ? "animate-pulse" : ""}`}
             onClick={() => {
               toggleAnimation();
             }}
             disabled={isButtonDisable}
           >
-            {isRevealed ? "Draw Another Card" : "Draw Your Fate"}
+            {isShuffling ? "🔮 Shuffling..." : isRevealed ? "Draw Another Card" : "Draw Your Fate"}
           </button>
         </div>
       </div>
