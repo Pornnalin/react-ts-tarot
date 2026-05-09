@@ -7,7 +7,7 @@ import { TarotContext } from "../context/tarotContext";
 // Extend Window interface to include searchTimeout
 declare global {
   interface Window {
-    searchTimeout?: NodeJS.Timeout;
+    searchTimeout?: ReturnType<typeof setTimeout>;
   }
 }
 
