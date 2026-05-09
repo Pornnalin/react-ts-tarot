@@ -21,14 +21,14 @@ function ShowTarotCard() {
     return (
       <div className="py-20 flex flex-col items-center justify-center text-center">
         <div className="text-6xl mb-4">🔮</div>
-        <h3 className="text-2xl font-bold text-[#e8e4e4] mb-2">Cards Not Found</h3>
-        <p className="text-[#94a3b8] mb-6">
+        <h3 className="text-2xl font-bold text-white mb-2">Cards Not Found</h3>
+        <p className="text-white/50 mb-6">
           Unable to load tarot cards. Please check your internet connection and try again.
         </p>
         <div className="flex gap-4">
           <button
             onClick={() => tarotContext?.fetchCards()}
-            className="rounded-[20px] bg-gradient-to-r from-[#8b6914] to-[#4a3060] py-3 px-10 text-white font-semibold text-[16px] hover:scale-105 hover:shadow-[0_4px_20px_rgba(168,140,38,0.5)] transition-all duration-300 shadow-[0_4px_15px_rgba(168,140,38,0.3)] animate-bounce-once"
+            className="rounded-[20px] bg-[#a88c26] py-3 px-10 text-white font-semibold text-[16px] hover:scale-105 transition-all duration-300 animate-bounce-once"
           >
             🔄 Try Again
           </button>
@@ -68,6 +68,7 @@ function ShowTarotCard() {
                     name={item.name}
                     desc={shortDesc(item.desc)}
                     img={tarotContext?.getImage(item.name)}
+                    delay={`${index * 60}ms`}
                   />
                 ))}
             </>

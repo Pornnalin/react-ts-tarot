@@ -61,7 +61,7 @@ function TarotDrawSection() {
   return (
     <>
       <div className="relative text-center my-[40px] sm:py-[40px] overflow-x-hidden h-full">
-        <h3 className="text-xl sm:text-[40px] py-2 px-4 sm:px-0 md:px-10 leading-relaxed text-[#e8e4e4] animate-fadeindown">
+        <h3 className="text-xl sm:text-[40px] py-2 px-4 sm:px-0 md:px-10 leading-relaxed text-white animate-fadeindown">
           Let the Cards Guide You, Choose One to Reveal Your Path
         </h3>
 
@@ -105,7 +105,7 @@ function TarotDrawSection() {
                 {/* Card Details */}
                 <li className="flex flex-col gap-6 text-center lg:text-left max-w-md animate-fadeinright">
                   <div className="flex items-center justify-center lg:justify-start gap-3">
-                    <h4 className="text-2xl md:text-3xl font-bold text-[#e8e4e4] animate-glow">
+                    <h4 className="text-2xl md:text-3xl font-bold text-white">
                       {tarotContext?.randCardDetail?.name}
                     </h4>
                     <button
@@ -127,12 +127,12 @@ function TarotDrawSection() {
                   </p>
 
                   <div className="flex flex-col gap-2">
-                    <p className={`text-sm text-[#94a3b8] animate-pulse ${
+                    <p className={`text-sm text-white/50 animate-pulse ${
                       tarotContext?.isReverse ? "text-red-400" : "text-green-400"
                     }`}>
                       {tarotContext?.isReverse ? "🔮 Card is Reversed" : "✨ Card is Upright"}
                     </p>
-                    <p className="text-sm text-[#94a3b8]">Click on the card for more details</p>
+                    <p className="text-sm text-white/50">Click on the card for more details</p>
                   </div>
                 </li>
               </ul>
@@ -142,7 +142,7 @@ function TarotDrawSection() {
 
         <div className="py-8 flex justify-center">
           <button
-            className={`rounded-[20px] bg-gradient-to-r from-[#8b6914] to-[#4a3060] py-3 px-10 text-white font-semibold text-[18px] hover:scale-105 hover:shadow-[0_4px_20px_rgba(168,140,38,0.5)] transition-all duration-300 shadow-[0_4px_15px_rgba(168,140,38,0.3)] animate-bounce-once ${
+            className={`rounded-[20px] bg-[#a88c26] py-3 px-10 text-white font-semibold text-[18px] hover:scale-105 transition-all duration-300 animate-bounce-once ${
               isButtonDisable ? "opacity-50 cursor-not-allowed" : ""
             } ${isShuffling ? "animate-pulse" : ""}`}
             onClick={() => {

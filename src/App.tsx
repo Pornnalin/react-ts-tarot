@@ -5,8 +5,26 @@ import TarotDraw from "./Pages/TarotDraw.tsx";
 import DetailTarotCard from "./Pages/DetailTarotCard.tsx";
 import NotFound from "./components/NotFound.tsx";
 import { TarotProvider } from "./context/tarotContext.tsx";
+import { useEffect } from "react";
+import Lenis from "lenis";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
+  useEffect(() => {
+    const lenis = new Lenis();
+    lenis.on("scroll", ScrollTrigger.update);
+    const tick = (time: number) => lenis.raf(time * 1000);
+    gsap.ticker.add(tick);
+    gsap.ticker.lagSmoothing(0);
+    return () => {
+      lenis.destroy();
+      gsap.ticker.remove(tick);
+    };
+  }, []);
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -31,7 +49,7 @@ function App() {
   ]);
   return (
     <TarotProvider>
-      <div className="relative w-screen max-w-full overflow-x-hidden h-[100vh] px-0 mx-0 ">
+      <div className="relative w-screen max-w-full overflow-x-hidden min-h-screen px-0 mx-0">
         <RouterProvider router={router} />
       </div>
     </TarotProvider>

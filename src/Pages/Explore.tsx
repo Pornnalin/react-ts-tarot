@@ -24,12 +24,12 @@ export default function Explore() {
           <p className="text-md">
             <a
               href="mailto:p.pornnalin.s@gmail.com"
-              className="text-[#a88c26] hover:text-[#6d4c7d] transition duration-300"
+              className="text-[#a88c26] hover:text-white transition duration-300"
             >
               Contact me
             </a>
           </p>
-          <p className="text-sm text-[#94a3b8]">&copy; 2024 Pornnalin</p>
+          <p className="text-sm text-white/50">&copy; 2024 Pornnalin</p>
         </div>
       </footer>
     </>

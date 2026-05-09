@@ -13,8 +13,8 @@ function FilterButton() {
             key={index}
             className={`rounded-full py-2 px-6 font-semibold text-[16px] transition-all duration-300 ${
               index.toString() === tarotContext?.selectIndexType
-                ? "bg-gradient-to-r from-[#a88c26] to-[#6d4c7d] text-white shadow-[0_4px_20px_rgba(168,140,38,0.5)]"
-                : "bg-transparent border-2 border-[#a88c26]/50 text-[#e8e4e4] hover:border-[#a88c26] hover:bg-[#a88c26]/20"
+                ? "bg-[#a88c26] text-white "
+                : "bg-transparent border-2 border-[#a88c26]/50 text-white hover:border-[#a88c26] hover:bg-[#a88c26]/20"
             }`}
             onClick={() => {
               if (tarotContext?.selectIndexType === index.toString()) {
@@ -41,8 +41,8 @@ function FilterButton() {
               key={index}
               className={`rounded-full py-2 px-6 font-semibold text-[14px] transition-all duration-300 ${
                 index.toString() === tarotContext?.selectIndexSuit
-                  ? "bg-gradient-to-r from-[#a88c26] to-[#6d4c7d] text-white shadow-[0_4px_20px_rgba(168,140,38,0.5)]"
-                  : "bg-transparent border-2 border-[#a88c26]/50 text-[#e8e4e4] hover:border-[#a88c26] hover:bg-[#a88c26]/20"
+                  ? "bg-[#a88c26] text-white "
+                  : "bg-transparent border-2 border-[#a88c26]/50 text-white hover:border-[#a88c26] hover:bg-[#a88c26]/20"
               }`}
               onClick={() => {
                 if (tarotContext?.selectIndexSuit === index.toString()) {
@@ -60,13 +60,13 @@ function FilterButton() {
       </div>
       <div className="flex gap-6">
         <button
-          className="text-[#e8e4e4] hover:text-[#a88c26] hover:underline font-medium transition-all duration-300"
+          className="text-white hover:text-[#a88c26] hover:underline font-medium transition-all duration-300"
           onClick={tarotContext?.sortAZ}
         >
           A-Z
         </button>
         <button
-          className="text-[#e8e4e4] hover:text-[#a88c26] hover:underline font-medium transition-all duration-300"
+          className="text-white hover:text-[#a88c26] hover:underline font-medium transition-all duration-300"
           onClick={tarotContext?.sortZA}
         >
           Z-A

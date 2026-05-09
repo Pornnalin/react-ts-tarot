@@ -69,7 +69,7 @@ export default function TarotDeck() {
               type="text"
               value={tarotContext?.searchDeckPage}
               placeholder="Search by card or meaning..."
-              className="md:w-[60%] w-full py-3 px-5 rounded-full border-2 border-[#a88c26]/30 bg-[#181717]/80 backdrop-blur-sm text-left text-[16px] text-[#e8e4e4] focus:outline-none focus:border-[#a88c26] focus:shadow-[0_0_20px_-5px_rgba(168,140,38,0.3)] transition-all duration-300"
+              className="md:w-[60%] w-full py-3 px-5 rounded-full border-2 border-[#a88c26]/30 bg-[#181717]/80 backdrop-blur-sm text-left text-[16px] text-white focus:outline-none focus:border-[#a88c26] transition-all duration-300"
               onChange={(e) => {
                 const value = e.target.value;
                 tarotContext?.setSearchDeckPage(value);
@@ -98,21 +98,21 @@ export default function TarotDeck() {
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   tarotContext.current === 1 || tarotContext.maxPage === 0
                     ? "cursor-default text-gray-600 bg-gray-800/50"
-                    : "bg-gradient-to-r from-[#8b6914] to-[#4a3060] text-white hover:scale-105 hover:shadow-[0_4px_20px_rgba(168,140,38,0.5)] shadow-[0_4px_15px_rgba(168,140,38,0.3)] animate-bounce-once"
+                    : "bg-[#a88c26] text-white hover:scale-105 animate-bounce-once"
                 }`}
                 onClick={tarotContext.goToBackPage}
                 disabled={tarotContext.current === 1 || tarotContext.maxPage === 0}
               >
                 ← Prev
               </button>
-              <span className="text-sm font-medium text-[#e8e4e4] min-w-[80px] text-center">
+              <span className="text-sm font-medium text-white min-w-[80px] text-center">
                 {tarotContext.maxPage > 0 ? `${tarotContext.current} / ${tarotContext.maxPage}` : '--'}
               </span>
               <button
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   tarotContext.current === tarotContext.maxPage || tarotContext.maxPage === 0
                     ? "cursor-default text-gray-600 bg-gray-800/50"
-                    : "bg-gradient-to-r from-[#8b6914] to-[#4a3060] text-white hover:scale-105 hover:shadow-[0_4px_20px_rgba(168,140,38,0.5)] shadow-[0_4px_15px_rgba(168,140,38,0.3)] animate-bounce-once"
+                    : "bg-[#a88c26] text-white hover:scale-105 animate-bounce-once"
                 }`}
                 onClick={tarotContext.goToNextPage}
                 disabled={tarotContext.current === tarotContext.maxPage || tarotContext.maxPage === 0}
