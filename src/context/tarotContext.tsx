@@ -2,6 +2,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 import { tarotCardImages } from "../components/TarotCardImages";
+import { getTarotImageCandidates } from "../utils/tarotNaming";
 interface CardList {
   type: string;
   suit: string;
@@ -368,9 +369,13 @@ export function TarotProvider({ children }: TarotProviderProps) {
   }, [cardDetail]);
 
   function getImage(nameImage: string): string {
-    const foundItem = tarotCardImages.find((item) => {
-      return item.name.trim().toLowerCase() === nameImage.trim().toLowerCase();
-    });
+    const candidates = getTarotImageCandidates(nameImage);
+    const foundItem = tarotCardImages.find((item) =>
+      candidates.some(
+        (candidate) =>
+          item.name.trim().toLowerCase() === candidate.trim().toLowerCase()
+      )
+    );
     if (foundItem) {
       return foundItem.src;
     } else {

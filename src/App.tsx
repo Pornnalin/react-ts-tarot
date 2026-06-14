@@ -39,7 +39,7 @@ function App() {
       element: <TarotDraw />,
     },
     {
-      path: "/detailtarotcard/:name",
+      path: "/detailtarotcard/:slug",
       element: <DetailTarotCard />,
     },
     {

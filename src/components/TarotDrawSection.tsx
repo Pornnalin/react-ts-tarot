@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import TarotDrawCard from "./TarotDrawCard";
 import { BsTranslate } from "react-icons/bs";
 import { tarotMeaningsAll } from "../data/tarotMeaningsAll78_complete.ts";
+import { getTarotMeaningKey, toTarotSlug } from "../utils/tarotNaming";
 
 function TarotDrawSection() {
   const tarotContext = useContext(TarotContext);
@@ -21,7 +22,7 @@ function TarotDrawSection() {
     e.preventDefault();
     tarotContext?.setSelectNameCard(name); //อัพเดทข้อมูลตรงนี้
     //สามารถส่งผ่านข้อมูลข้าม pageได้
-    navigate(`/detailtarotcard/${name.toLowerCase().trim()}`, {
+    navigate(`/detailtarotcard/${toTarotSlug(name)}`, {
       state: { setSelectNameCard: name }, //ส่งข้อมูล
     });
   };
@@ -52,7 +53,7 @@ function TarotDrawSection() {
       }, 900); // Allow flip back animation to complete (0.8s + buffer)
     }
   };
-  const nameKey = name.toLowerCase().trim();
+  const nameKey = getTarotMeaningKey(name);
   const cardData = tarotMeaningsAll[nameKey];
   const meaning =
     isThai && cardData?.meaning_up_th

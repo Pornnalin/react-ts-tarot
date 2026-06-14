@@ -5,18 +5,38 @@ import { useContext, useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import { tarotMeaningsAll } from "../data/tarotMeaningsAll78_complete.ts";
 import { BsTranslate } from "react-icons/bs";
+import { useParams } from "react-router-dom";
+import {
+  getTarotMeaningKey,
+  slugToTarotName,
+  toTarotSlug,
+} from "../utils/tarotNaming";
 
 function DetailTarotCard() {
   const tarotContext = useContext(TarotContext);
+  const setCardDetail = tarotContext?.setCardDetail;
+  const setSelectNameCard = tarotContext?.setSelectNameCard;
   const [isLoaded, setIsLoaded] = useState(false);
   const [isThai, setIsThai] = useState(false);
+  const { slug } = useParams();
 
-  const nameKey = tarotContext?.cardDetail?.name?.toLowerCase().trim();
+  const routeSlug = slug ? decodeURIComponent(slug) : "";
+  const routeCardName = routeSlug ? slugToTarotName(routeSlug) : "";
+  const nameKey = getTarotMeaningKey(
+    tarotContext?.cardDetail?.name || routeCardName
+  );
   const meaningData = nameKey ? tarotMeaningsAll[nameKey] : undefined;
 
   const translatedMeaning = tarotContext?.isReverse
     ? meaningData?.meaning_rev_th
     : meaningData?.meaning_up_th;
+
+  useEffect(() => {
+    if (!routeCardName) return;
+
+    setCardDetail?.(undefined);
+    setSelectNameCard?.(routeCardName);
+  }, [routeCardName, setCardDetail, setSelectNameCard]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,11 +49,14 @@ function DetailTarotCard() {
   useEffect(() => {
     const storedCardDetail = localStorage.getItem("cardDetail");
     if (storedCardDetail) {
-      tarotContext?.setCardDetail(JSON.parse(storedCardDetail));
+      const parsedCardDetail = JSON.parse(storedCardDetail);
+      if (!slug || toTarotSlug(parsedCardDetail?.name || "") === toTarotSlug(routeCardName)) {
+        tarotContext?.setCardDetail(parsedCardDetail);
+      }
     }
     // Note: Don't override isReverse from localStorage here since it should come from the card draw
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [routeCardName, slug]);
   return (
     <div className="max-w-screen-xl mx-auto sm:px-[70px] px-[30px] h-full">
       <NavbarDetail />

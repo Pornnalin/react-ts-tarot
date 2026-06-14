@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { TarotContext } from "../context/tarotContext";
 import { useNavigate } from "react-router-dom";
+import { toTarotSlug } from "../utils/tarotNaming";
 
 interface tarotProps {
   name: string;
@@ -16,7 +17,7 @@ function TarotCard({ name, img, desc, delay }: tarotProps) {
     e.preventDefault();
     tarotContext?.setSelectNameCard(name); //อัพเดทข้อมูลตรงนี้
     //สามารถส่งผ่านข้อมูลข้าม pageได้
-    navigate(`/detailtarotcard/${name.toLowerCase().trim()}`, {
+    navigate(`/detailtarotcard/${toTarotSlug(name)}`, {
       state: { setSelectNameCard: name }, //ส่งข้อมูล
     });
   };
