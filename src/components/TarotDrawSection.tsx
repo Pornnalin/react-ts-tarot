@@ -67,27 +67,29 @@ function TarotDrawSection() {
         </h3>
 
         {!isPaused ? (
-          <div className={`w-[200%] transition-opacity duration-300 ${isPaused ? 'opacity-0' : 'opacity-100'}`}>
-            <div
-              className={`py-7 w-[100%] sliderCard ${
-                isPaused ? "animate-fadeout" : ""
-              }`}
-            >
-              <ul className="flex pl-0 m-0">
-                {Array.from(Array(8), (_, i) => {
-                  return (
-                    <li key={i} className="animate-fadeinup" style={{ animationDelay: `${i * 100}ms` }}>
-                      <TarotDrawCard
-                        isPaused={false}
-                        isFlipped={false}
-                        backcard={backcard}
-                        handleClickDetail={() => console.log("")}
-                      />
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+          <div
+            className={`overflow-hidden transition-opacity duration-300 ${
+              isPaused ? "opacity-0" : "opacity-100"
+            }`}
+          >
+            <ul className={`sliderCard flex w-max flex-nowrap items-center gap-4 sm:gap-5 lg:gap-6 pl-0 m-0 py-7 px-4 sm:px-6`}>
+              {Array.from({ length: 2 }, (_, copyIndex) =>
+                Array.from(Array(8), (_, i) => (
+                  <li
+                    key={`${copyIndex}-${i}`}
+                    className="flex-none animate-fadeinup"
+                    style={{ animationDelay: `${i * 100}ms` }}
+                  >
+                    <TarotDrawCard
+                      isPaused={false}
+                      isFlipped={false}
+                      backcard={backcard}
+                      handleClickDetail={() => console.log("")}
+                    />
+                  </li>
+                ))
+              )}
+            </ul>
           </div>
         ) : (
           <div className="flex justify-center items-center py-10 animate-fadeindowncard">

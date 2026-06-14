@@ -9,17 +9,17 @@
 }
 
 html {
-  background-color: #303030;
+  background-color: #141414;
 }
 
 body {
   background: linear-gradient(
     135deg,
-    #0a0a0a 0%,
-    #111111 25%,
-    #0d0d0d 50%,
-    #111111 75%,
-    #050505 100%
+    #151515 0%,
+    #1c1c1c 25%,
+    #171717 50%,
+    #1c1c1c 75%,
+    #131313 100%
   );
   background-size: 400% 400%;
   animation: mysticalGradient 30s ease infinite;
@@ -52,32 +52,32 @@ body::before {
   background-image:
     radial-gradient(
       2px 2px at 20px 30px,
-      rgba(168, 140, 38, 0.3) 0px,
+      rgba(168, 140, 38, 0.18) 0px,
       transparent 0px
     ),
     radial-gradient(
       2px 2px at 60px 70px,
-      rgba(255, 255, 255, 0.12) 0px,
+      rgba(255, 255, 255, 0.08) 0px,
       transparent 0px
     ),
     radial-gradient(
       1px 1px at 50px 160px,
-      rgba(168, 140, 38, 0.4) 0px,
+      rgba(168, 140, 38, 0.24) 0px,
       transparent 0px
     ),
     radial-gradient(
       2px 2px at 90px 40px,
-      rgba(168, 140, 38, 0.2) 0px,
+      rgba(168, 140, 38, 0.12) 0px,
       transparent 0px
     ),
     radial-gradient(
       1px 1px at 130px 80px,
-      rgba(255, 255, 255, 0.1) 0px,
+      rgba(255, 255, 255, 0.06) 0px,
       transparent 0px
     ),
     radial-gradient(
       2px 2px at 160px 120px,
-      rgba(168, 140, 38, 0.25) 0px,
+      rgba(168, 140, 38, 0.16) 0px,
       transparent 0px
     );
   background-size: 200px 200px;
@@ -124,7 +124,8 @@ body::before {
   }
 }
 .sliderCard {
-  animation: cardmove 10s linear infinite;
+  animation: cardmove 22s linear infinite;
+  width: max-content;
 }
 @keyframes cardmove {
   0% {
@@ -135,7 +136,7 @@ body::before {
   }
 }
 .sliderCard li {
-  width: 100%;
+  width: auto;
 }
 .paused {
   -webkit-animation-play-state: paused;
@@ -158,7 +159,10 @@ body::before {
   text-align: center;
   transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   transform-style: preserve-3d;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(209, 169, 75, 0.16);
   will-change: transform;
   transform: translateZ(0);
 }
@@ -174,9 +178,11 @@ body::before {
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-radius: 12px;
+  border-radius: inherit;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.24),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
   will-change: transform;
   transform: translateZ(0);
 }
@@ -190,11 +196,17 @@ body::before {
 }
 
 .flip-card:hover .flip-card-inner {
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(209, 169, 75, 0.22),
+    0 0 18px rgba(209, 169, 75, 0.08);
 }
 
 .flip-card-inner.flipped {
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(209, 169, 75, 0.22),
+    0 0 18px rgba(209, 169, 75, 0.08);
 }
 .text-thai {
   font-family: "IBM Plex Sans Thai", sans-serif;
@@ -336,6 +348,39 @@ body::before {
   .flip-card {
     width: 220px;
     height: 440px;
+  }
+
+  .sliderCard {
+    animation-duration: 34s;
+  }
+}
+
+@media (max-width: 1024px) {
+  .flip-card {
+    width: 250px;
+    height: 420px;
+  }
+
+  .sliderCard {
+    animation-duration: 26s;
+  }
+}
+
+@media (max-width: 768px) {
+  .flip-card {
+    width: 210px;
+    height: 380px;
+  }
+
+  .sliderCard {
+    animation-duration: 30s;
+  }
+}
+
+@media (max-width: 600px) {
+  .flip-card {
+    width: 180px;
+    height: 340px;
   }
 }
 

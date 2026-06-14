@@ -36,9 +36,7 @@ function TarotDrawCard({
             decoding="sync"
           />
         </div>
-        <div
-          className={`flip-card-back ${isReversed ? "reversed" : ""}`}
-        >
+        <div className={`flip-card-back ${isReversed ? "reversed" : ""}`}>
           <img
             src={getRandImage()}
             className="w-full h-full object-cover rounded-lg cursor-pointer"
