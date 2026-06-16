@@ -72,7 +72,9 @@ function TarotDrawSection() {
               isPaused ? "opacity-0" : "opacity-100"
             }`}
           >
-            <ul className={`sliderCard flex w-max flex-nowrap items-center gap-4 sm:gap-5 lg:gap-6 pl-0 m-0 py-7 px-4 sm:px-6`}>
+            <ul
+              className={`sliderCard flex w-max flex-nowrap items-center gap-4 sm:gap-5 lg:gap-6 pl-0 m-0 py-7 px-4 sm:px-6`}
+            >
               {Array.from({ length: 2 }, (_, copyIndex) =>
                 Array.from(Array(8), (_, i) => (
                   <li
@@ -87,7 +89,7 @@ function TarotDrawSection() {
                       handleClickDetail={() => console.log("")}
                     />
                   </li>
-                ))
+                )),
               )}
             </ul>
           </div>
@@ -130,12 +132,20 @@ function TarotDrawSection() {
                   </p>
 
                   <div className="flex flex-col gap-2">
-                    <p className={`text-sm text-white/50 animate-pulse ${
-                      tarotContext?.isReverse ? "text-red-400" : "text-green-400"
-                    }`}>
-                      {tarotContext?.isReverse ? "🔮 Card is Reversed" : "✨ Card is Upright"}
+                    <p
+                      className={`text-sm text-white/50 animate-pulse ${
+                        tarotContext?.isReverse
+                          ? "text-red-400"
+                          : "text-green-400"
+                      }`}
+                    >
+                      {tarotContext?.isReverse
+                        ? "🔮 Card is Reversed"
+                        : "✨ Card is Upright"}
                     </p>
-                    <p className="text-sm text-white/50">Click on the card for more details</p>
+                    <p className="text-sm text-white/50">
+                      Click on the card for more details
+                    </p>
                   </div>
                 </li>
               </ul>
@@ -153,7 +163,11 @@ function TarotDrawSection() {
             }}
             disabled={isButtonDisable}
           >
-            {isShuffling ? "🔮 Shuffling..." : isRevealed ? "Draw Another Card" : "Draw Your Fate"}
+            {isShuffling
+              ? "🔮 Shuffling..."
+              : isRevealed
+                ? "Draw Another Card"
+                : "Draw Your Fate"}
           </button>
         </div>
       </div>
