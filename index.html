@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,7 +8,34 @@
       href="/crystal-ball-svgrepo-com.svg"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tarotwhisper</title>
+    <title>Tarot Whisper - Free Online Tarot Card Reading & Meanings</title>
+    <meta
+      name="description"
+      content="Draw a free online tarot card and search the meanings of all 78 tarot cards, upright and reversed."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://tarotwhisper.netlify.app/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Tarot Whisper" />
+    <meta
+      property="og:title"
+      content="Tarot Whisper - Free Online Tarot Card Reading & Meanings"
+    />
+    <meta
+      property="og:description"
+      content="Draw a free online tarot card and search the meanings of all 78 tarot cards, upright and reversed."
+    />
+    <meta property="og:url" content="https://tarotwhisper.netlify.app/" />
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="Tarot Whisper - Free Online Tarot Card Reading & Meanings"
+    />
+    <meta
+      name="twitter:description"
+      content="Draw a free online tarot card and search the meanings of all 78 tarot cards, upright and reversed."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,6 +47,22 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;200;300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-4JXJDX67WJ"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      // Pageviews are sent manually on route change (see src/hooks/useSeo.ts)
+      // since this is a client-side-routed SPA.
+      gtag("config", "G-4JXJDX67WJ", { send_page_view: false });
+    </script>
   </head>
 
   <body>

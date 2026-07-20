@@ -46,7 +46,7 @@ function ShowTarotCard() {
   return (
     <>
       {location.pathname !== "/tarotdeck" ? (
-        <div className="grid py-20 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-8">
+        <div className="grid py-8 sm:py-20 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 justify-items-center gap-4 sm:gap-8">
           {tarotContext?.cardList.map((item, index) => (
             <TarotCard
               key={index}
@@ -57,7 +57,7 @@ function ShowTarotCard() {
           ))}
         </div>
       ) : (
-        <div className="grid py-20 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 justify-items-center gap-8">
+        <div className="grid py-8 sm:py-20 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 justify-items-center gap-4 sm:gap-8">
           {tarotContext?.allCard && tarotContext?.allCard.length > 0 ? (
             <>
               {tarotContext?.allCard

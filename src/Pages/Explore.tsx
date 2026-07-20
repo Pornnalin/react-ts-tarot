@@ -1,8 +1,14 @@
 import TarotDrawSection from "../components/TarotDrawSection";
 import TarotSearch from "../components/TarotSearch";
 import Navbar from "../components/Navbar";
+import { useSeo } from "../hooks/useSeo";
 
 export default function Explore() {
+  useSeo(
+    "Tarot Whisper - Free Online Tarot Card Reading & Meanings",
+    "Draw a free online tarot card and search the meanings of all 78 tarot cards, upright and reversed.",
+    "/"
+  );
   return (
     <>
       <div className="relative">

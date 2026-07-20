@@ -23,7 +23,7 @@ function TarotCard({ name, img, desc, delay }: tarotProps) {
   };
   return (
     <div
-      className="flex flex-col max-w-[230px] sm:max-w-[300px] md:max-w-[350px] lg:max-w-[450px] box-border rounded-t-full overflow-hidden cursor-pointer animate-fadeinup relative group"
+      className="flex flex-col w-full max-w-[160px] sm:max-w-[230px] md:max-w-[300px] lg:max-w-[350px] xl:max-w-[450px] box-border rounded-t-full overflow-hidden cursor-pointer animate-fadeinup relative group"
       style={delay ? { animationDelay: delay, opacity: 0, animationFillMode: "forwards" } : undefined}
       onClick={handleClickDetail}
     >

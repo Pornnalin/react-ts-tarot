@@ -47,6 +47,7 @@ function App() {
       element: <NotFound />,
     },
   ]);
+
   return (
     <TarotProvider>
       <div className="relative w-screen max-w-full overflow-x-hidden min-h-screen px-0 mx-0">

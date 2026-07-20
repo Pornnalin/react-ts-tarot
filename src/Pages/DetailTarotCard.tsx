@@ -11,6 +11,7 @@ import {
   slugToTarotName,
   toTarotSlug,
 } from "../utils/tarotNaming";
+import { useSeo } from "../hooks/useSeo";
 
 function DetailTarotCard() {
   const tarotContext = useContext(TarotContext);
@@ -30,6 +31,15 @@ function DetailTarotCard() {
   const translatedMeaning = tarotContext?.isReverse
     ? meaningData?.meaning_rev_th
     : meaningData?.meaning_up_th;
+
+  useSeo(
+    routeCardName
+      ? `${routeCardName} Tarot Card Meaning | Tarot Whisper`
+      : "Tarot Card Meaning | Tarot Whisper",
+    tarotContext?.cardDetail?.desc?.slice(0, 155) ||
+      `Discover the meaning of the ${routeCardName} tarot card, upright and reversed.`,
+    `/detailtarotcard/${routeSlug}`
+  );
 
   useEffect(() => {
     if (!routeCardName) return;

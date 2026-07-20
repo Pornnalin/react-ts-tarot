@@ -3,6 +3,7 @@ import FilterButton from "../components/FilterButton";
 import Navbar from "../components/Navbar";
 import ShowTarotCard from "../components/ShowTarotCard";
 import { TarotContext } from "../context/tarotContext";
+import { useSeo } from "../hooks/useSeo";
 
 // Extend Window interface to include searchTimeout
 declare global {
@@ -12,6 +13,11 @@ declare global {
 }
 
 export default function TarotDeck() {
+  useSeo(
+    "Tarot Card Deck - All 78 Tarot Cards & Meanings | Tarot Whisper",
+    "Browse the full tarot deck: Major and Minor Arcana cards with meanings. Search and filter by card name.",
+    "/tarotdeck"
+  );
   const tarotContext = useContext(TarotContext);
   const [retryCount, setRetryCount] = useState(0);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
